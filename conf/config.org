@@ -1,0 +1,13 @@
+#+TITLE: My Emacs Configuration
+#+AUTHOR: Samuel Nilsson
+#+EMAIL: samuel@samuelnilsson.net
+#+OPTIONS: num:nil
+
+* UI
+
+#+begin_src emacs-lisp
+(setq inhibit-startup-message t)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+#+end_src
