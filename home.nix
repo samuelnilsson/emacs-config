@@ -1,5 +1,4 @@
-{ self, ... }@inputs:
-{ options, config, pkgs, ... }:
+self: { config, lib, pkgs, ... }:
 {
   options = {
     my-emacs = with lib; {
@@ -8,17 +7,15 @@
   };
 
   config = lib.mkIf config.my-emacs.enable {
-    nixpkgs.overlays = [ (import self.inputs.emacs-overlay) ];
-
     programs.emacs = {
       enable = true;
-      package = pkgs.emacs-unstable;
+      package = pkgs.myEmacs;
     };
 
     services.emacs = {
       client.enable = true;
       enable = true;
-      package = pkgs.emacs-unstable;
+      package = pkgs.myEmacs;
     };
 
     home.file."${config.xdg.configHome}/emacs" = {
