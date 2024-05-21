@@ -1,4 +1,7 @@
 self: { config, lib, pkgs, ... }:
+let
+  emacs = pkgs.myEmacs;
+in
 {
   options = {
     my-emacs = with lib; {
@@ -9,13 +12,13 @@ self: { config, lib, pkgs, ... }:
   config = lib.mkIf config.my-emacs.enable {
     programs.emacs = {
       enable = true;
-      package = pkgs.myEmacs;
+      package = emacs;
     };
 
     services.emacs = {
       client.enable = true;
       enable = true;
-      package = pkgs.myEmacs;
+      package = emacs;
     };
 
     home.file."${config.xdg.configHome}/emacs" = {

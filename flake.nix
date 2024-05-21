@@ -9,28 +9,32 @@
 
   outputs = { self, nixpkgs, emacs-overlay }:
     let
+      system = "x86_64-linux";
+
       overlayMyEmacs = prev: final: {
         myEmacs = import ./package.nix {
           pkgs = final;
         };
       };
 
+      overlays = [ emacs-overlay.overlays.default overlayMyEmacs ];
+
       pkgs = import nixpkgs {
-        system = "x86_64-linux";
-        overlays = [ emacs-overlay.overlays.default overlayMyEmacs ];
+        system = system;
+        overlays = overlays;
       };
 
     in
     {
-      packages.x86_64-linux.default = pkgs.myEmacs;
+      packages.${system}.default = pkgs.myEmacs;
 
       homeManagerModules.default = import ./home.nix self;
 
-      overlays.default = [ emacs-overlay.overlays.default overlayMyEmacs ];
+      overlays.default = overlays;
 
-      apps.x86_64-linux.default =
+      apps.${system}.default =
         let
-          serv = pkgs.writeShellApplication {
+          start = pkgs.writeShellApplication {
             name = "start";
             runtimeInputs = [ pkgs.myEmacs ];
             text = ''
@@ -42,10 +46,10 @@
         in
         {
           type = "app";
-          program = "${serv}/bin/start";
+          program = "${start}/bin/start";
         };
 
-      devShell.x86_64-linux = pkgs.mkShell {
+      devShell.${system} = pkgs.mkShell {
         buildInputs = with pkgs; [
           git
           nil
