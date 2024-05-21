@@ -1,1 +1,3 @@
-{ pkgs }: pkgs.emacs-unstable
+{ pkgs }: (pkgs.emacsPackagesFor pkgs.emacs-unstable).emacsWithPackages (
+  epkgs: [ epkgs.vterm ]
+)
