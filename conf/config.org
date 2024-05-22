@@ -21,3 +21,13 @@
 #+begin_src emacs-lisp
 (set-face-attribute 'default nil :font "@fontName@" :height @fontSize@)
 #+end_src
+
+** Theme
+
+Set the catppuccin macchiato theme to not burn my eyes.
+
+#+begin_src emacs-lisp
+(load-theme 'catppuccin :no-confirm)
+(setq catppuccin-flavor 'macchiato)
+(catppuccin-reload)
+#+end_src

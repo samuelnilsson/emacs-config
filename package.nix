@@ -1,3 +1,6 @@
 { pkgs }: (pkgs.emacsPackagesFor pkgs.emacs-unstable).emacsWithPackages (
-  epkgs: [ epkgs.vterm ]
+  epkgs: with epkgs; [
+    vterm
+    catppuccin-theme
+  ]
 )
