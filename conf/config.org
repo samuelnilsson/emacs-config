@@ -15,3 +15,9 @@
 (scroll-bar-mode -1)  ; Disable visible scrollbar
 (set-fringe-mode 10)  ; Give some breathing room
 #+end_src
+
+** Font
+
+#+begin_src emacs-lisp
+(set-face-attribute 'default nil :font "@fontName@" :height @fontSize@)
+#+end_src
