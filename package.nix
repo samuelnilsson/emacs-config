@@ -2,5 +2,6 @@
   epkgs: with epkgs; [
     vterm
     catppuccin-theme
+    ligature
   ]
 )
