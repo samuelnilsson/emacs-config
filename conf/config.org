@@ -109,3 +109,12 @@ Set the catppuccin macchiato theme to not burn my eyes.
 (setq catppuccin-flavor 'macchiato)
 (catppuccin-reload)
 #+end_src
+
+* Keybindings
+
+Enable vi-like keybindings by using evil mode.
+
+#+begin_src emacs-lisp
+(require 'evil)
+(evil-mode 1)
+#+end_src

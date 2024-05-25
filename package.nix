@@ -3,5 +3,6 @@
     vterm
     catppuccin-theme
     ligature
+    evil
   ]
 )
