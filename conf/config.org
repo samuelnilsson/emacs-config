@@ -118,3 +118,20 @@ Enable vi-like keybindings by using evil mode.
 (require 'evil)
 (evil-mode 1)
 #+end_src
+
+* Completion
+
+** UI
+
+Use vertico plugin as completion UI
+
+#+begin_src emacs-lisp
+(use-package vertico
+  :init
+  (vertico-mode))
+
+(use-package savehist
+  :init
+  (savehist-mode))
+#+end_src
+

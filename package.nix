@@ -4,5 +4,6 @@
     catppuccin-theme
     ligature
     evil
+    vertico
   ]
 )
