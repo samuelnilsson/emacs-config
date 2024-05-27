@@ -6,5 +6,6 @@
     evil
     vertico
     marginalia
+    orderless
   ]
 )

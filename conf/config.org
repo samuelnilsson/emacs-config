@@ -147,3 +147,15 @@ Add completion annotations from marginalia package
   :init
   (marginalia-mode))
 #+end_src
+
+** Fuzzy
+
+Enable matching of space separated patterns using orderless
+
+#+begin_src emacs-lisp
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+#+end_src
+
