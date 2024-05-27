@@ -135,3 +135,15 @@ Use vertico plugin as completion UI
   (savehist-mode))
 #+end_src
 
+** Annotations
+
+Add completion annotations from marginalia package
+
+#+begin_src emacs-lisp
+(use-package marginalia
+  :bind (:map minibuffer-local-map
+         ("M-A" . marginalia-cycle))
+
+  :init
+  (marginalia-mode))
+#+end_src

@@ -5,5 +5,6 @@
     ligature
     evil
     vertico
+    marginalia
   ]
 )
