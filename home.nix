@@ -6,7 +6,6 @@ let
   configFile = import ./conf {
     inherit pkgs;
     font = with conf.font; {
-      name = name;
       size = builtins.toString (size * 10);
     };
   };
@@ -16,7 +15,6 @@ in
   options.my-emacs = with lib; {
     enable = mkEnableOption "Enable my custom emacs";
     font = {
-      name = mkOption { type = types.str; };
       size = mkOption { type = types.int; };
     };
   };
@@ -32,6 +30,10 @@ in
       enable = true;
       package = emacs;
     };
+
+    home.packages = [
+      (pkgs.nerdfonts.override { fonts = [ "Iosevka" ]; })
+    ];
 
     home.file."${config.xdg.configHome}/emacs/init.el" = {
       source = ./conf/init.el;

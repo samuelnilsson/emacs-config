@@ -34,18 +34,16 @@
 
       apps.${system}.default =
         let
-          fontPkg = (pkgs.nerdfonts.override { fonts = [ "CascadiaCode" ]; });
           config = import ./conf {
             inherit pkgs;
             font = {
-              name = "CaskaydiaCove Nerd Font";
               size = "120";
             };
           };
 
           start = pkgs.writeShellApplication {
             name = "start";
-            runtimeInputs = [ pkgs.myEmacs fontPkg ];
+            runtimeInputs = [ pkgs.myEmacs ];
             text = ''
               EMACS_INIT_DIR=$(mktemp -d)
               cp ${config} "$EMACS_INIT_DIR/config.org"
