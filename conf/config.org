@@ -23,8 +23,7 @@
 #+begin_src emacs-lisp
 (setq nix-font-name "@fontName@")
 
-(when (display-graphic-p)
-  (set-face-attribute 'default nil :font nix-font-name :height @fontSize@))
+(set-face-attribute 'default nil :font nix-font-name :height @fontSize@)
 #+end_src
 
 *** Ligatures
@@ -32,7 +31,7 @@
 Ligatures are enabled using the ligature.el package, since support is not built into emacs.
 
 #+begin_src emacs-lisp
-(when (and (display-graphic-p) (string-match-p "Caskaydia" nix-font-name))
+(when (string-match-p "Caskaydia" nix-font-name)
   (use-package ligature
     :config
     (ligature-set-ligatures 't '("www"))
