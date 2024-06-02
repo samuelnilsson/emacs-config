@@ -5,6 +5,13 @@
 
 * UI
 
+Only eval UI related configuration when creating a frame.
+
+#+begin_src emacs-lisp
+(defun new-frame-setup (frame)
+  (when (display-graphic-p frame)
+#+end_src
+
 ** Disable unused ui elements
 
 #+begin_src emacs-lisp
@@ -21,8 +28,21 @@
 *** Set the font
 
 #+begin_src emacs-lisp
-(when (find-font (font-spec :name "Iosevka Nerd Font"))
-  (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height @fontSize@))
+  (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height @fontSize@)
+  (set-face-attribute 'fixed-pitch nil :font "Iosevka Nerd Font" :height @fontSize@)
+  (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height @fontSize@)
+
+  (defun set-buffer-variable-pitch ()
+    (interactive)
+    (variable-pitch-mode t)
+    (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-link nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-code nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-special-keyword nil :inherit 'fixed-pitch))
+
+  (add-hook 'org-mode-hook 'set-buffer-variable-pitch)
 #+end_src
 
 *** Ligatures
@@ -30,18 +50,13 @@
 Ligatures are enabled using the ligature.el package, since support is not built into emacs.
 
 #+begin_src emacs-lisp
-(when (find-font (font-spec :name "Iosevka Nerd Font"))
-  (use-package ligature
-    :load-path "path-to-ligature-repo"
-    :config
-    ;; Enable all Iosevka ligatures in programming modes
-    (ligature-set-ligatures 'prog-mode '("<---" "<--"  "<<-" "<-" "->" "-->" "--->" "<->" "<-->" "<--->" "<---->" "<!--"
-                                         "<==" "<===" "<=" "=>" "=>>" "==>" "===>" ">=" "<=>" "<==>" "<===>" "<====>" "<!---"
-                                         "<~~" "<~" "~>" "~~>" "::" ":::" "==" "!=" "===" "!=="
-                                         ":=" ":-" ":+" "<*" "<*>" "*>" "<|" "<|>" "|>" "+:" "-:" "=:" "<******>" "++" "+++"))
-    ;; Enables ligature checks globally in all buffers. You can also do it
-    ;; per mode with `ligature-mode'.
-    (global-ligature-mode t)))
+(use-package ligature
+  :config
+  (ligature-set-ligatures 'prog-mode '("<---" "<--"  "<<-" "<-" "->" "-->" "--->" "<->" "<-->" "<--->" "<---->" "<!--"
+                                       "<==" "<===" "<=" "=>" "=>>" "==>" "===>" ">=" "<=>" "<==>" "<===>" "<====>" "<!---"
+                                       "<~~" "<~" "~>" "~~>" "::" ":::" "==" "!=" "===" "!=="
+                                       ":=" ":-" ":+" "<*" "<*>" "*>" "<|" "<|>" "|>" "+:" "-:" "=:" "<******>" "++" "+++"))
+  (global-ligature-mode t))
 #+end_src
 
 ** Theme
@@ -52,6 +67,16 @@ Set the catppuccin macchiato theme to not burn my eyes.
 (load-theme 'catppuccin :no-confirm)
 (setq catppuccin-flavor 'macchiato)
 (catppuccin-reload)
+#+end_src
+
+** Eval UI on new frame
+
+Eval new-frame-setup function on existing frames and when new frames are created.
+
+#+begin_src emacs-lisp
+))
+(mapc 'new-frame-setup (frame-list))
+(add-hook 'after-make-frame-functions 'new-frame-setup)
 #+end_src
 
 * Keybindings

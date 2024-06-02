@@ -33,6 +33,16 @@ in
 
     home.packages = [
       (pkgs.nerdfonts.override { fonts = [ "Iosevka" ]; })
+      (pkgs.iosevka.override {
+        privateBuildPlan = {
+          family = "Iosevka Aile";
+          spacing = "quasi-proportional";
+          serifs = "sans";
+          noCvSs = true;
+          exportGlyphNames = false;
+        };
+        set = "Aile";
+      })
     ];
 
     home.file."${config.xdg.configHome}/emacs/init.el" = {
