@@ -5,6 +5,12 @@
 
 * UI
 
+Disable the startup message.
+
+#+begin_src emacs-lisp
+(setq inhibit-startup-message t)
+#+end_src
+
 Only eval UI related configuration when creating a frame.
 
 #+begin_src emacs-lisp
@@ -15,12 +21,18 @@ Only eval UI related configuration when creating a frame.
 ** Disable unused ui elements
 
 #+begin_src emacs-lisp
-(setq inhibit-startup-message t) ; Disable the startup message
-
 (menu-bar-mode -1)    ; Disable the menu bar
 (tool-bar-mode -1)    ; Disable toolbar
 (scroll-bar-mode -1)  ; Disable visible scrollbar
 (set-fringe-mode 10)  ; Give some breathing room
+#+end_src
+
+** Ring bell
+
+Disable the ring bell.
+
+#+begin_src emacs-lisp
+(setq ring-bell-function 'ignore)
 #+end_src
 
 ** Font
