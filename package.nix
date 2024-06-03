@@ -1,11 +1,12 @@
 { pkgs }: (pkgs.emacsPackagesFor pkgs.emacs-unstable).emacsWithPackages (
   epkgs: with epkgs; [
-    vterm
     catppuccin-theme
-    ligature
     evil
-    vertico
+    ligature
     marginalia
     orderless
+    org-roam
+    vertico
+    vterm
   ]
 )
