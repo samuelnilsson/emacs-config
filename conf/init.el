@@ -1,6 +1,6 @@
 (package-initialize)
 
-(org-babel-load-file
+(load-file
   (expand-file-name
-    "config.org"
+    "config.el"
     user-emacs-directory))

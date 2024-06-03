@@ -49,6 +49,10 @@ in
       source = ./conf/init.el;
     };
 
+    home.file."${config.xdg.configHome}/emacs/early-init.el" = {
+      source = ./conf/early-init.el;
+    };
+
     home.file."${config.xdg.configHome}/emacs/config.org" = {
       source = configFile;
     };
