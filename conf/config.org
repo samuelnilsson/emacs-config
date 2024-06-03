@@ -81,6 +81,11 @@ Set the catppuccin macchiato theme to not burn my eyes.
 (catppuccin-reload)
 #+end_src
 
+** Opacity
+#+begin_src emacs-lisp
+(add-to-list 'default-frame-alist '(alpha . 98))
+#+end_src
+
 ** Eval UI on new frame
 
 Eval new-frame-setup function on existing frames and when new frames are created.
