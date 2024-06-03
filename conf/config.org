@@ -86,6 +86,13 @@ Set the catppuccin macchiato theme to not burn my eyes.
 (add-to-list 'default-frame-alist '(alpha . 98))
 #+end_src
 
+** Spacing
+Increase the line spacing for some breathing room.
+
+#+begin_src emacs-lisp
+(setq-default line-spacing 3) 
+#+end_src
+
 ** Eval UI on new frame
 
 Eval new-frame-setup function on existing frames and when new frames are created.
