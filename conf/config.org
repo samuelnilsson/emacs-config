@@ -143,6 +143,21 @@ Enable matching of space separated patterns using orderless
 
 * Org
 
+** Agenda
+
+Set the org directory and which org files to include in the agenda.
+
+#+begin_src emacs-lisp
+(setq org-directory "~/wiki/" org-agenda-files (list "inbox.org" "gtd.org" "tickler.org" "workcal.org" "someday.org"))
+#+end_src
+
+Set custom todo keywords.
+
+#+begin_src emacs-lisp
+(setq org-todo-keywords
+      '((sequence "TODO" "WAITING" "|" "DONE" "CANCELLED")))
+#+end_src
+
 ** Roam
 
 Configure roam package, used for knowledge management.
