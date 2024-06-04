@@ -4,15 +4,16 @@
     embark
     evil
     ligature
+    magit
     marginalia
+    nix-mode
     orderless
-    org-roam
-    vertico
-    vterm
     org-bullets
+    org-roam
     tree-sitter
     tree-sitter-langs
     treesit-grammars.with-all-grammars
-    nix-mode
+    vertico
+    vterm
   ]
 )

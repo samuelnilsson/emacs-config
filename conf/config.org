@@ -244,7 +244,6 @@ Enable treesitter syntax.
   :hook
   (tree-sitter-after-on . tree-sitter-hl-mode))
 #+end_src
-
 * Languages
 ** Nix
 #+begin_src emacs-lisp
@@ -258,4 +257,12 @@ Automatically revert a buffer when the underlying file changes on disk.
 
 #+begin_src emacs-lisp
 (global-auto-revert-mode 1)
+#+end_src
+
+** Git
+*** Magit
+Enable magit.
+
+#+begin_src emacs-lisp
+(require 'magit)
 #+end_src
