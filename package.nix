@@ -9,5 +9,6 @@
     org-roam
     vertico
     vterm
+    org-bullets
   ]
 )
