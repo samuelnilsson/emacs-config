@@ -220,12 +220,36 @@ Autosave org buffers to avoid syncthing conflicts.
 (add-hook 'auto-save-hook 'org-save-all-org-buffers)
 #+end_src
 
-** UI
+** Editor
 Display bullets instead of asterisks in headers.
 
 #+begin_src emacs-lisp
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+#+end_src
+* Editor
+** Syntax
+Enable treesitter syntax.
+
+#+begin_src emacs-lisp
+(use-package tree-sitter
+  :hook
+  ((nix-mode) . tree-sitter-mode-enable)
+  :preface
+  (defun tree-sitter-mode-enable ()
+    (tree-sitter-mode t))
+  :defer t)
+
+(use-package tree-sitter-langs
+  :hook
+  (tree-sitter-after-on . tree-sitter-hl-mode))
+#+end_src
+
+* Languages
+** Nix
+#+begin_src emacs-lisp
+(use-package nix-mode
+ :mode "\\.nix\\'")
 #+end_src
 * Other
 ** Revert buffer automatically

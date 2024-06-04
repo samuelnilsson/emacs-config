@@ -10,5 +10,9 @@
     vertico
     vterm
     org-bullets
+    tree-sitter
+    tree-sitter-langs
+    treesit-grammars.with-all-grammars
+    nix-mode
   ]
 )
