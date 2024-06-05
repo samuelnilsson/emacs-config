@@ -1,6 +1,7 @@
 { pkgs }: (pkgs.emacsPackagesFor pkgs.emacs-unstable).emacsWithPackages (
   epkgs: with epkgs; [
     catppuccin-theme
+    consult
     embark
     evil
     ligature
