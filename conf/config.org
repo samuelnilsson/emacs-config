@@ -159,8 +159,8 @@ Use embark plugin to enable actions/commands in buffers based on what's near poi
 #+begin_src emacs-lisp
   (use-package embark
     :bind
-    (("M-." . embark-act)
-     ("M-;" . embark-dwim)
+    (("C-." . embark-act)
+     ("C-;" . embark-dwim)
      ("C-h B" . embark-bindings))
 
     :init
