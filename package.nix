@@ -1,5 +1,6 @@
 { pkgs }: (pkgs.emacsPackagesFor pkgs.emacs-unstable).emacsWithPackages (
   epkgs: with epkgs; [
+    ace-window
     catppuccin-theme
     consult
     embark

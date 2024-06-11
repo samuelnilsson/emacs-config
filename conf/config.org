@@ -112,6 +112,25 @@ Enable vi-like keybindings by using evil mode.
 (evil-mode 1)
 #+end_src
 
+* Navigation
+
+** Switch window
+
+Use ace-window package to switch window with fewer keystrokes and in a more predictable way
+
+#+begin_src emacs-lisp
+(use-package ace-window
+  :bind
+  (("M-p" . 'ace-window)))
+#+end_src
+
+Activate ace-window even if only two windows, in order to always be able to use "[[https://github.com/abo-abo/ace-window#change-the-action-midway][action midway]]"
+
+#+begin_src emacs-lisp
+  :init
+  (setq aw-dispatch-always t)
+#+end_src
+
 * Completion
 
 ** UI
