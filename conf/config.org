@@ -306,6 +306,18 @@ Set custom todo keywords.
       '((sequence "TODO" "WAITING" "|" "DONE" "CANCELLED")))
 #+end_src
 
+** Capture
+
+Capture buffer format and which file to capture to
+
+#+begin_src emacs-lisp
+
+(setq org-capture-templates
+      '(("t" "Todo" entry
+         (file "~/wiki/inbox.org")
+       	"* TODO %?\n  %i\n  %a")))
+#+end_src
+
 ** Roam
 
 Configure roam package, used for knowledge management.
