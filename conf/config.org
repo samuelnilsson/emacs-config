@@ -409,3 +409,12 @@ Enable magit.
 #+begin_src emacs-lisp
 (require 'magit)
 #+end_src
+
+** Direnv
+
+Add direnv support to load per-directory/project environment per buffer by enabling envrc package.
+
+#+begin_src emacs-lisp
+(use-package envrc
+  :hook (after-init . envrc-global-mode))
+#+end_src

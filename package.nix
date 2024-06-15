@@ -4,6 +4,7 @@
     catppuccin-theme
     consult
     embark
+    envrc
     evil
     ligature
     magit
