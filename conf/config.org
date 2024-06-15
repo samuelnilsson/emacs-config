@@ -291,12 +291,18 @@ Enable consult plugin for search anv navigation
 
 * Org
 
-** Agenda
+** Agenda/GTD
+
+Define org files.
+
+#+begin_src emacs-lisp
+(setq org-gtd-agenda-files (list "inbox.org" "gtd.org" "tickler.org" "someday.org"))
+#+end_src
 
 Set the org directory and which org files to include in the agenda.
 
 #+begin_src emacs-lisp
-(setq org-directory "~/wiki/" org-agenda-files (list "inbox.org" "gtd.org" "tickler.org" "workcal.org" "someday.org"))
+(setq org-directory "~/wiki/" org-agenda-files (append org-gtd-agenda-files "workcal.org"))
 #+end_src
 
 Set custom todo keywords.
@@ -304,6 +310,17 @@ Set custom todo keywords.
 #+begin_src emacs-lisp
 (setq org-todo-keywords
       '((sequence "TODO" "WAITING" "|" "DONE" "CANCELLED")))
+#+end_src
+
+Setup refile targets.
+
+#+begin_src emacs-lisp
+  (setq org-refile-use-outline-path 'file) ; show full path which also allows refile to file instead of only headings
+  (setq org-outline-path-complete-in-steps nil) ; generate all possible completions at once to not have to step through completions
+  (setq org-refile-allow-creating-parent-nodes 'confirm) ; allow creating nodes on-the-fly
+  (setq org-refile-targets
+    '((nil :maxlevel . 3) ; maxlevel of headers in current file
+    (org-gtd-agenda-files :maxlevel . 3))) ; maxlevel of headers in refile targets
 #+end_src
 
 ** Capture
