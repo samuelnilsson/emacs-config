@@ -11,11 +11,18 @@ Disable the startup message.
 (setq inhibit-startup-message t)
 #+end_src
 
-Only eval UI related configuration when creating a frame.
+Function to run action only when in gui.
 
 #+begin_src emacs-lisp
-(defun new-frame-setup (frame)
-  (when (display-graphic-p frame)
+(defun apply-if-gui (&rest action)
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+                (lambda (frame)
+                  (select-frame frame)
+                  (if (display-graphic-p frame)
+                      (apply action))))
+    (if (display-graphic-p)
+        (apply action))))
 #+end_src
 
 ** Disable unused ui elements
@@ -40,6 +47,7 @@ Disable the ring bell.
 *** Set the font
 
 #+begin_src emacs-lisp
+(defun set-fonts()
   (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height @fontSize@)
   (set-face-attribute 'fixed-pitch nil :font "Iosevka Nerd Font" :height @fontSize@)
   (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height @fontSize@)
@@ -54,7 +62,9 @@ Disable the ring bell.
     (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
     (set-face-attribute 'org-special-keyword nil :inherit 'fixed-pitch))
 
-  (add-hook 'org-mode-hook 'set-buffer-variable-pitch)
+  (add-hook 'org-mode-hook 'set-buffer-variable-pitch))
+
+(apply-if-gui 'set-fonts)
 #+end_src
 
 *** Ligatures
@@ -62,13 +72,16 @@ Disable the ring bell.
 Ligatures are enabled using the ligature.el package, since support is not built into emacs.
 
 #+begin_src emacs-lisp
-(use-package ligature
-  :config
-  (ligature-set-ligatures 'prog-mode '("<---" "<--"  "<<-" "<-" "->" "-->" "--->" "<->" "<-->" "<--->" "<---->" "<!--"
-                                       "<==" "<===" "<=" "=>" "=>>" "==>" "===>" ">=" "<=>" "<==>" "<===>" "<====>" "<!---"
-                                       "<~~" "<~" "~>" "~~>" "::" ":::" "==" "!=" "===" "!=="
-                                       ":=" ":-" ":+" "<*" "<*>" "*>" "<|" "<|>" "|>" "+:" "-:" "=:" "<******>" "++" "+++"))
-  (global-ligature-mode t))
+  (use-package ligature
+    :config
+    (defun set-ligatures()
+      (ligature-set-ligatures 'prog-mode '("<---" "<--"  "<<-" "<-" "->" "-->" "--->" "<->" "<-->" "<--->" "<---->" "<!--"
+  					 "<==" "<===" "<=" "=>" "=>>" "==>" "===>" ">=" "<=>" "<==>" "<===>" "<====>" "<!---"
+  					 "<~~" "<~" "~>" "~~>" "::" ":::" "==" "!=" "===" "!=="
+  					 ":=" ":-" ":+" "<*" "<*>" "*>" "<|" "<|>" "|>" "+:" "-:" "=:" "<******>" "++" "+++"))
+      (global-ligature-mode t)))
+    (apply-if-gui 'set-ligatures)
+
 #+end_src
 
 ** Theme
@@ -76,31 +89,27 @@ Ligatures are enabled using the ligature.el package, since support is not built 
 Set the catppuccin macchiato theme to not burn my eyes.
 
 #+begin_src emacs-lisp
-(load-theme 'catppuccin :no-confirm)
-(setq catppuccin-flavor 'macchiato)
-(catppuccin-reload)
+(defun set-theme()
+  (load-theme 'catppuccin :no-confirm)
+  (setq catppuccin-flavor 'macchiato)
+  (catppuccin-reload))
+(apply-if-gui 'set-theme)
 #+end_src
 
 ** Opacity
 #+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(alpha . 98))
+(defun set-opacity()
+  (add-to-list 'default-frame-alist '(alpha . 98)))
+(apply-if-gui 'set-opacity)
 #+end_src
 
 ** Spacing
 Increase the line spacing for some breathing room.
 
 #+begin_src emacs-lisp
-(setq-default line-spacing 3) 
-#+end_src
-
-** Eval UI on new frame
-
-Eval new-frame-setup function on existing frames and when new frames are created.
-
-#+begin_src emacs-lisp
-))
-(mapc 'new-frame-setup (frame-list))
-(add-hook 'after-make-frame-functions 'new-frame-setup)
+(defun set-line-spacing()
+  (setq-default line-spacing 3))
+(apply-if-gui 'set-line-spacing)
 #+end_src
 
 * Keybindings
