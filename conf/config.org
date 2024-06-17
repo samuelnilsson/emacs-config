@@ -16,13 +16,12 @@ Function to run action only when in gui.
 #+begin_src emacs-lisp
 (defun apply-if-gui (&rest action)
   (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (select-frame frame)
-                  (if (display-graphic-p frame)
-                      (apply action))))
-    (if (display-graphic-p)
-        (apply action))))
+    (add-hook 'server-after-make-frame-hook
+      (lambda (frame)
+        (if (display-graphic-p frame)
+          (apply action)))))
+  (if (display-graphic-p)
+    (apply action)))
 #+end_src
 
 ** Disable unused ui elements
