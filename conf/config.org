@@ -311,7 +311,7 @@ Define org files.
 Set the org directory and which org files to include in the agenda.
 
 #+begin_src emacs-lisp
-(setq org-directory "~/wiki/" org-agenda-files (append org-gtd-agenda-files "workcal.org"))
+(setq org-directory "~/wiki/" org-agenda-files (push "workcal.org" org-gtd-agenda-files))
 #+end_src
 
 Set custom todo keywords.
