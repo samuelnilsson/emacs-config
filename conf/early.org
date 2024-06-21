@@ -13,22 +13,22 @@ See [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Creating-Frames.
 *** Set the font
 
 #+begin_src emacs-lisp
+(defun set-buffer-variable-pitch ()
+  (interactive)
+  (variable-pitch-mode t)
+  (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-link nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-special-keyword nil :inherit 'fixed-pitch))
+
+(add-hook 'org-mode-hook 'set-buffer-variable-pitch)
+
 (defun set-font ()
   (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height @fontSize@)
   (set-face-attribute 'fixed-pitch nil :font "Iosevka Nerd Font" :height @fontSize@)
-  (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height @fontSize@)
-
-  (defun set-buffer-variable-pitch ()
-    (interactive)
-    (variable-pitch-mode t)
-    (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-link nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-code nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
-    (set-face-attribute 'org-special-keyword nil :inherit 'fixed-pitch))
-
-  (add-hook 'org-mode-hook 'set-buffer-variable-pitch))
+  (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height @fontSize@))
 #+end_src
 
 *** Ligatures
