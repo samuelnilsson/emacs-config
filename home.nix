@@ -3,7 +3,7 @@ let
   conf = config.my-emacs;
   emacs = pkgs.myEmacs;
 
-  configFile = import ./conf {
+  configFiles = import ./conf {
     inherit pkgs;
     font = with conf.font; {
       size = builtins.toString (size * 10);
@@ -54,7 +54,11 @@ in
     };
 
     home.file."${config.xdg.configHome}/emacs/config.org" = {
-      source = configFile;
+      source = configFiles.config;
+    };
+
+    home.file."${config.xdg.configHome}/emacs/early.org" = {
+      source = configFiles.early;
     };
   };
 }

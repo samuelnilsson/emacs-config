@@ -46,7 +46,8 @@
             runtimeInputs = [ pkgs.myEmacs ];
             text = ''
               EMACS_INIT_DIR=$(mktemp -d)
-              cp ${config} "$EMACS_INIT_DIR/config.org"
+              cp ${config.config} "$EMACS_INIT_DIR/config.org"
+              cp ${config.early} "$EMACS_INIT_DIR/early.org"
               cp ${builtins.toString ./conf/init.el} "$EMACS_INIT_DIR"
               cp ${builtins.toString ./conf/early-init.el} "$EMACS_INIT_DIR"
               ${pkgs.myEmacs}/bin/emacs --init-directory "$EMACS_INIT_DIR"
