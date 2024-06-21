@@ -4,6 +4,7 @@
     catppuccin-theme
     consult
     embark
+    embark-consult
     envrc
     evil
     ligature

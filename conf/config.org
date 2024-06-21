@@ -127,6 +127,10 @@ Use embark plugin to enable actions/commands in buffers based on what's near poi
 		 '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
 		   nil
 		   (window-parameters (mode-line-format . none)))))
+
+  (use-package embark-consult
+    :hook
+    (embark-collect-mode . consult-preview-at-point-mode))
 #+end_src
 
 ** Search and navigation
