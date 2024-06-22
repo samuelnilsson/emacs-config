@@ -68,9 +68,19 @@ Activate ace-window even if only two windows, in order to always be able to use 
 
 * Completion
 
-** UI
+** Text Completion
 
-Use vertico plugin as completion UI
+Use company package for auto completion of text in buffers.
+
+#+begin_src emacs-lisp
+(use-package company
+  :config
+  (add-hook 'after-init-hook 'global-company-mode))
+#+end_src
+
+** Minibuffer UI
+
+Use vertico plugin as minibuffer completion UI
 
 #+begin_src emacs-lisp
 (use-package vertico

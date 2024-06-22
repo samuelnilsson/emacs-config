@@ -2,6 +2,7 @@
   epkgs: with epkgs; [
     ace-window
     catppuccin-theme
+    company
     consult
     embark
     embark-consult
