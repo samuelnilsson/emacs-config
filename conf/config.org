@@ -25,12 +25,6 @@ Disable the ring bell.
 (setq ring-bell-function 'ignore)
 #+end_src
 
-** Opacity
-
-#+begin_src emacs-lisp
-(add-to-list 'default-frame-alist '(alpha . 98))
-#+end_src
-
 ** Spacing
 Increase the line spacing for some breathing room.
 

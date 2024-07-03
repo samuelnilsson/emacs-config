@@ -57,17 +57,24 @@ Set the catppuccin macchiato theme to not burn my eyes.
   (catppuccin-reload))
 #+end_src
 
+** Opacity
+
+#+begin_src emacs-lisp
+(defun set-opacity ()
+  (set-frame-parameter (selected-frame) 'alpha 98))
+#+end_src
+
 ** Eval fonts and themes on new frame
 
 Only eval fonts and theme related configuration when creating a frame.
 Otherwise it will not work in daemon mode.
 
 #+begin_src emacs-lisp
-(defun new-frame-setup (frame)
-(when (display-graphic-p frame)
-  (set-font)
-  (set-ligatures)
-  (set-theme)))
-(mapc 'new-frame-setup (frame-list))
-(add-hook 'after-make-frame-functions 'new-frame-setup)
+  (defun new-frame-setup ()
+    (when (display-graphic-p (selected-frame))
+      (set-font)
+      (set-ligatures)
+      (set-theme)
+      (set-opacity)))
+  (add-hook 'server-after-make-frame-hook 'new-frame-setup)
 #+end_src
