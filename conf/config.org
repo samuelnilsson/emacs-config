@@ -75,7 +75,7 @@ Use company package for auto completion of text in buffers.
 #+begin_src emacs-lisp
 (use-package company
   :config
-  (add-hook 'after-init-hook 'global-company-mode))
+ (add-hook 'after-init-hook 'global-company-mode))
 #+end_src
 
 ** Minibuffer UI
@@ -326,6 +326,7 @@ Enable treesitter syntax.
 #+begin_src emacs-lisp
 (use-package tree-sitter
   :hook
+  ((csharp-mode) . tree-sitter-mode-enable)
   ((nix-mode) . tree-sitter-mode-enable)
   :preface
   (defun tree-sitter-mode-enable ()
@@ -337,11 +338,32 @@ Enable treesitter syntax.
   (tree-sitter-after-on . tree-sitter-hl-mode))
 #+end_src
 * Languages
+
+** Lsp
+
+Enable lsp-mode for programming language features.
+
+#+begin_src emacs-lisp
+  (defun csharp-lsp ()
+    (setq lsp-csharp-server-path (executable-find "OmniSharp"))
+    (lsp))
+
+  (use-package lsp-mode
+    :init
+      (setq lsp-keymap-prefix "C-c l")
+    :hook
+      (csharp-mode . csharp-lsp)
+    :commands lsp)
+
+  (use-package lsp-ui :commands lsp-ui-mode)
+#+end_src
+
 ** Nix
 #+begin_src emacs-lisp
 (use-package nix-mode
  :mode "\\.nix\\'")
 #+end_src
+
 * Other
 ** Revert buffer automatically
 

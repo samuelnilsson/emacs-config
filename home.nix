@@ -31,9 +31,10 @@ in
       package = emacs;
     };
 
-    home.packages = [
-      (pkgs.nerdfonts.override { fonts = [ "Iosevka" ]; })
-      (pkgs.iosevka.override {
+    home.packages = with pkgs; [
+      omnisharp-roslyn
+      (nerdfonts.override { fonts = [ "Iosevka" ]; })
+      (iosevka.override {
         privateBuildPlan = {
           family = "Iosevka Aile";
           spacing = "quasi-proportional";

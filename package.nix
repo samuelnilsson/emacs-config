@@ -9,6 +9,8 @@
     envrc
     evil
     ligature
+    lsp-mode
+    lsp-ui
     magit
     marginalia
     nix-mode
