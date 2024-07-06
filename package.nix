@@ -4,6 +4,7 @@
     catppuccin-theme
     company
     consult
+    doom-modeline
     embark
     embark-consult
     envrc

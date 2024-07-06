@@ -32,6 +32,16 @@ Increase the line spacing for some breathing room.
 (setq-default line-spacing 3)
 #+end_src
 
+** Modeline
+
+Enable doom modeline.
+
+#+begin_src emacs-lisp
+  (use-package doom-modeline
+    :ensure t
+    :init (doom-modeline-mode 1))
+#+end_src
+
 * Keybindings
 
 Enable vi-like keybindings by using evil mode.
