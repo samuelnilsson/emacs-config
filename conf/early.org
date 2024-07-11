@@ -80,7 +80,7 @@ Otherwise it will not work in daemon mode.
   (defun new-frame-setup-no-daemon (frame)
     (new-frame-setup frame))
 
-  (defun new-frame-setup-daemon (frame)
+  (defun new-frame-setup-daemon ()
     (new-frame-setup (selected-frame)))
 
   (if (daemonp)
