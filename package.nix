@@ -14,6 +14,10 @@
     lsp-ui
     magit
     marginalia
+    nerd-icons
+    nerd-icons-dired
+    nerd-icons-ibuffer
+    nerd-icons-completion
     nix-mode
     orderless
     org-bullets

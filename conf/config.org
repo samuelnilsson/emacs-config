@@ -42,6 +42,27 @@ Enable doom modeline.
     :init (doom-modeline-mode 1))
 #+end_src
 
+** Icons
+
+Enable nerd font icons
+
+#+begin_src emacs-lisp
+  (use-package nerd-icons
+    :custom
+    (nerd-icons-font-family "Iosevka Nerd Font"))
+
+  (use-package nerd-icons-dired
+    :hook
+    (dired-mode . nerd-icons-dired-mode))
+
+  (use-package nerd-icons-completion
+    :config
+    (nerd-icons-completion-mode))
+
+  (use-package nerd-icons-ibuffer
+    :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
+#+end_src
+
 * Keybindings
 
 Enable vi-like keybindings by using evil mode.
