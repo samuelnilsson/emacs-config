@@ -9,6 +9,7 @@
     embark-consult
     envrc
     evil
+    evil-collection
     ligature
     lsp-mode
     lsp-ui
