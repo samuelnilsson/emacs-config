@@ -88,7 +88,7 @@ Enable evil for more modes by enabling modes from evil-collection.
 
 Enable which-key to see the possible keybindings following the currently entered incomplete command.
 
-#+begin_src
+#+begin_src emacs-lisp
 (use-package which-key
   :init (which-key-mode))
 #+end_src
