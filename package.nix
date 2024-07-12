@@ -28,5 +28,6 @@
     treesit-grammars.with-all-grammars
     vertico
     vterm
+    which-key
   ]
 )
