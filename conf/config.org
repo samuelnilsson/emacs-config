@@ -93,6 +93,52 @@ Enable which-key to see the possible keybindings following the currently entered
   :init (which-key-mode))
 #+end_src
 
+** Spacemacs-like menus
+
+Use general.el to define space as the global prefix key.
+
+#+begin_src emacs-lisp
+  (require 'general)
+  (general-create-definer global-definer
+    :keymaps 'override
+    :states '(insert emacs normal hybrid motion visual operator)
+    :prefix "SPC"
+    :non-normal-prefix "S-SPC")
+#+end_src
+
+Macro for creating nested shortcut menus, taken from [[https://gist.github.com/progfolio/1c96a67fcec7584b31507ef664de36cc#nested-menus][Spacemacs-like menus using general.el]].
+
+#+begin_src emacs-lisp
+  (defmacro +general-global-menu! (name infix-key &rest body)
+   (declare (indent 2))
+    `(progn
+       (general-create-definer ,(intern (concat "+general-global-" name))
+         :wrapping global-definer
+         :prefix-map (quote ,(intern (concat "+general-global-" name "-map")))
+         :infix ,infix-key
+         :wk-full-keys nil
+         "" '(:ignore t :which-key ,name))
+       (,(intern (concat "+general-global-" name))
+        ,@body)))
+#+end_src
+
+*** Window management
+
+#+begin_src emacs-lisp
+  (+general-global-menu! "window" "w"
+        "r" 'split-window-right
+        "v" 'split-window-vertically
+        "s" '((lambda () (interactive) (ace-window nil)) :which-key "switch-window"))
+#+end_src
+
+*** Org
+
+#+begin_src
+  (+general-global-menu! "org" "o"
+        "a" 'org-agenda
+        "s" 'consult-org-agenda)
+#+end_src
+
 * Navigation
 
 ** Switch window

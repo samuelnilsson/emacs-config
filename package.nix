@@ -10,6 +10,7 @@
     envrc
     evil
     evil-collection
+    general
     ligature
     lsp-mode
     lsp-ui
