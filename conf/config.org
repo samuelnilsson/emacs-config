@@ -106,7 +106,7 @@ Use general.el to define space as the global prefix key.
     :non-normal-prefix "S-SPC")
 #+end_src
 
-Macro for creating nested shortcut menus, taken from [[https://gist.github.com/progfolio/1c96a67fcec7584b31507ef664de36cc#nested-menus][Spacemacs-like menus using general.el]].
+Macro for creating nested global shortcut menus, taken from [[https://gist.github.com/progfolio/1c96a67fcec7584b31507ef664de36cc#nested-menus][Spacemacs-like menus using general.el]].
 
 #+begin_src emacs-lisp
   (defmacro +general-global-menu! (name infix-key &rest body)
@@ -133,10 +133,19 @@ Macro for creating nested shortcut menus, taken from [[https://gist.github.com/p
 
 *** Org
 
-#+begin_src
+#+begin_src emacs-lisp
   (+general-global-menu! "org" "o"
         "a" 'org-agenda
         "s" 'consult-org-agenda)
+#+end_src
+
+*** Git
+
+#+begin_src emacs-lisp
+  (+general-global-menu! "git" "g"
+        "s" 'magit-status
+        "P" 'magit-push
+        "p" 'magit-pull)
 #+end_src
 
 * Navigation
