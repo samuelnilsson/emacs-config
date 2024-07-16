@@ -26,6 +26,7 @@ Disable the ring bell.
 #+end_src
 
 ** Spacing
+
 Increase the line spacing for some breathing room.
 
 #+begin_src emacs-lisp
@@ -447,14 +448,14 @@ Enable lsp-mode for programming language features.
 #+begin_src emacs-lisp
   (defun csharp-lsp ()
     (setq lsp-csharp-server-path (executable-find "OmniSharp"))
-    (lsp))
+    (lsp-deferred))
 
   (use-package lsp-mode
     :init
       (setq lsp-keymap-prefix "C-c l")
     :hook
       (csharp-mode . csharp-lsp)
-    :commands lsp)
+    :commands lsp-deferred)
 
   (use-package lsp-ui :commands lsp-ui-mode)
 #+end_src

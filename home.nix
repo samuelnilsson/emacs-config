@@ -32,7 +32,6 @@ in
     };
 
     home.packages = with pkgs; [
-      omnisharp-roslyn
       (nerdfonts.override { fonts = [ "Iosevka" ]; })
       (iosevka.override {
         privateBuildPlan = {
