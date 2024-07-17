@@ -155,6 +155,7 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
 #+begin_src emacs-lisp
   (+general-global-menu! "syntax" "f"
         "s" 'consult-flycheck
+        "S" 'lsp-ui-flycheck-list
         "n" 'flycheck-next-error
         "p" 'flycheck-previous-error)
 #+end_src
