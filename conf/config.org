@@ -432,8 +432,11 @@ Display bullets instead of asterisks in headers.
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 #+end_src
+
 * Editor
+
 ** Syntax
+
 Enable treesitter syntax.
 
 #+begin_src emacs-lisp
@@ -449,6 +452,14 @@ Enable treesitter syntax.
 (use-package tree-sitter-langs
   :hook
   (tree-sitter-after-on . tree-sitter-hl-mode))
+#+end_src
+
+** Line numbers
+
+Enable line numbers when programming.
+
+#+begin_src emacs-lisp
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 #+end_src
 
 * Syntax checking
