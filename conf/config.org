@@ -150,6 +150,15 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
         "p" 'magit-pull)
 #+end_src
 
+*** Syntax
+
+#+begin_src emacs-lisp
+  (+general-global-menu! "syntax" "f"
+        "s" 'consult-flycheck
+        "n" 'flycheck-next-error
+        "p" 'flycheck-previous-error)
+#+end_src
+
 * Navigation
 
 ** Switch window
@@ -440,6 +449,16 @@ Enable treesitter syntax.
   :hook
   (tree-sitter-after-on . tree-sitter-hl-mode))
 #+end_src
+
+* Syntax checking
+
+Enable syntax checking with flycheck globally.
+
+#+begin_src emacs-lisp
+(use-package flycheck
+  :init (global-flycheck-mode))
+#+end_src
+
 * Languages
 
 ** Lsp

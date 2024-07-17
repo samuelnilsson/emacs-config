@@ -4,12 +4,14 @@
     catppuccin-theme
     company
     consult
+    consult-flycheck
     doom-modeline
     embark
     embark-consult
     envrc
     evil
     evil-collection
+    flycheck
     general
     ligature
     lsp-mode
