@@ -12,7 +12,7 @@
       system = "x86_64-linux";
 
       overlayMyEmacs = prev: final: {
-        myEmacs = (import ./package.nix) {
+        myEmacs = import ./package.nix {
           pkgs = final;
         };
       };

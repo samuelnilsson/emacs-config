@@ -41,7 +41,6 @@ in
     };
 
     home.packages = with pkgs; [
-      pdf-tools
       (nerdfonts.override { fonts = [ "Iosevka" ]; })
       (iosevka.override {
         privateBuildPlan = {
