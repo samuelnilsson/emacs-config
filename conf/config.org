@@ -176,7 +176,7 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
           "l" 'consult-line
           "L" 'consult-line-multi
           "f" 'consult-find
-  	"d" 'dired)
+  	"d" 'dirvish)
 #+end_src
 
 *** Project
@@ -527,6 +527,7 @@ Enable lsp-mode for programming language features.
 #+end_src
 
 * Other
+
 ** Revert buffer automatically
 
 Automatically revert a buffer when the underlying file changes on disk.
@@ -550,4 +551,13 @@ Add direnv support to load per-directory/project environment per buffer by enabl
 #+begin_src emacs-lisp
 (use-package envrc
   :hook (after-init . envrc-global-mode))
+#+end_src
+
+** File browser
+
+Use dirvish instead of dired.
+
+#+begin_src emacs-lisp
+(use-package dirvish
+  :init (dirvish-override-dired-mode))
 #+end_src

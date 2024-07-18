@@ -5,6 +5,7 @@
     company
     consult
     consult-flycheck
+    dirvish
     doom-modeline
     embark
     embark-consult
@@ -19,9 +20,9 @@
     magit
     marginalia
     nerd-icons
+    nerd-icons-completion
     nerd-icons-dired
     nerd-icons-ibuffer
-    nerd-icons-completion
     nix-mode
     orderless
     org-bullets

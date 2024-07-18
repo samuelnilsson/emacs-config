@@ -10,6 +10,15 @@ let
     };
   };
 
+  dirvishDeps = with pkgs; [
+    epub-thumbnailer
+    fd
+    ffmpegthumbnailer
+    gnutar
+    imagemagick
+    mediainfo
+    unzip
+  ];
 in
 {
   options.my-emacs = with lib; {
@@ -32,6 +41,7 @@ in
     };
 
     home.packages = with pkgs; [
+      pdf-tools
       (nerdfonts.override { fonts = [ "Iosevka" ]; })
       (iosevka.override {
         privateBuildPlan = {
@@ -43,7 +53,7 @@ in
         };
         set = "Aile";
       })
-    ];
+    ] ++ dirvishDeps;
 
     home.file."${config.xdg.configHome}/emacs/init.el" = {
       source = ./conf/init.el;
