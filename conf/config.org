@@ -163,7 +163,7 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
 *** Navigation
 
 #+begin_src emacs-lisp
-  (+general-global-menu! "syntax" "n"
+  (+general-global-menu! "navigation" "n"
         "n" 'avy-goto-char
         "l" 'avy-goto-line
         "w" 'avy-goto-word)
