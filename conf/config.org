@@ -561,3 +561,14 @@ Use dirvish instead of dired.
 (use-package dirvish
   :init (dirvish-override-dired-mode))
 #+end_src
+
+** Pdf
+
+Use pdf-tools to view pdf files.
+
+#+begin_src emacs-lisp
+(use-package pdf-tools
+  :mode ("\\.pdf$" . pdf-view-mode)
+  :config
+    (pdf-tools-install :no-query))
+#+end_src
