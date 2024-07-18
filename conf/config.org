@@ -160,6 +160,34 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
         "p" 'flycheck-previous-error)
 #+end_src
 
+*** Navigation
+
+#+begin_src emacs-lisp
+  (+general-global-menu! "syntax" "n"
+        "n" 'avy-goto-char
+        "l" 'avy-goto-line
+        "w" 'avy-goto-word)
+#+end_src
+
+*** Find/Search
+
+#+begin_src emacs-lisp
+    (+general-global-menu! "search" "s"
+          "l" 'consult-line
+          "L" 'consult-line-multi
+          "f" 'consult-find
+  	"d" 'dired)
+#+end_src
+
+*** Project
+
+#+begin_src emacs-lisp
+    (+general-global-menu! "project" "p"
+          "p" 'project-switch-project
+          "f" 'project-find-file
+  	"d" 'project-dired)
+#+end_src
+
 * Navigation
 
 ** Switch window
