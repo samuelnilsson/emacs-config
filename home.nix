@@ -19,6 +19,10 @@ let
     mediainfo
     unzip
   ];
+
+  mermaidDeps = with pkgs; [
+    mermaid-cli
+  ];
 in
 {
   options.my-emacs = with lib; {
@@ -52,7 +56,7 @@ in
         };
         set = "Aile";
       })
-    ] ++ dirvishDeps;
+    ] ++ dirvishDeps ++ mermaidDeps;
 
     home.file."${config.xdg.configHome}/emacs/init.el" = {
       source = ./conf/init.el;
