@@ -19,12 +19,12 @@
     lsp-ui
     magit
     marginalia
-    mermaid-mode
     nerd-icons
     nerd-icons-completion
     nerd-icons-dired
     nerd-icons-ibuffer
     nix-mode
+    ob-mermaid
     orderless
     org-bullets
     org-roam
