@@ -468,18 +468,9 @@ Display bullets instead of asterisks in headers.
 Enable treesitter syntax.
 
 #+begin_src emacs-lisp
-(use-package tree-sitter
-  :hook
-  ((csharp-mode) . tree-sitter-mode-enable)
-  ((nix-mode) . tree-sitter-mode-enable)
-  :preface
-  (defun tree-sitter-mode-enable ()
-    (tree-sitter-mode t))
-  :defer t)
-
-(use-package tree-sitter-langs
-  :hook
-  (tree-sitter-after-on . tree-sitter-hl-mode))
+  (use-package treesit-auto
+    :config
+    (global-treesit-auto-mode))
 #+end_src
 
 ** Line numbers

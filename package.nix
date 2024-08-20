@@ -29,9 +29,8 @@
     org-bullets
     org-roam
     pdf-tools
-    tree-sitter
-    tree-sitter-langs
     treesit-grammars.with-all-grammars
+    treesit-auto
     vertico
     vterm
     which-key

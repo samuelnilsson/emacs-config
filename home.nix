@@ -73,5 +73,8 @@ in
     home.file."${config.xdg.configHome}/emacs/early.org" = {
       source = configFiles.early;
     };
+
+    home.file."${config.xdg.configHome}/emacs/.local/cache/tree-sitter".source =
+      "${(pkgs.emacsPackagesFor pkgs.emacs-unstable).treesit-grammars.with-all-grammars}/lib";
   };
 }
