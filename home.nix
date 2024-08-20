@@ -74,7 +74,7 @@ in
       source = configFiles.early;
     };
 
-    home.file."${config.xdg.configHome}/emacs/.local/cache/tree-sitter".source =
+    home.file."${config.xdg.configHome}/emacs/tree-sitter".source =
       "${(pkgs.emacsPackagesFor pkgs.emacs-unstable).treesit-grammars.with-all-grammars}/lib";
   };
 }
