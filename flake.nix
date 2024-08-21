@@ -26,7 +26,7 @@
 
     in
     {
-      packages.${system}.default = pkgs.myEmacs;
+      packages.${system}.default = pkgs.myEmacs.pkg;
 
       homeManagerModules.default = import ./home.nix self;
 
@@ -43,14 +43,15 @@
 
           start = pkgs.writeShellApplication {
             name = "start";
-            runtimeInputs = [ pkgs.myEmacs ];
+            runtimeInputs = [ pkgs.myEmacs.pkg ];
             text = ''
               EMACS_INIT_DIR=$(mktemp -d)
               cp ${config.config} "$EMACS_INIT_DIR/config.org"
               cp ${config.early} "$EMACS_INIT_DIR/early.org"
               cp ${builtins.toString ./conf/init.el} "$EMACS_INIT_DIR"
               cp ${builtins.toString ./conf/early-init.el} "$EMACS_INIT_DIR"
-              ${pkgs.myEmacs}/bin/emacs --init-directory "$EMACS_INIT_DIR"
+              ln -s ${pkgs.myEmacs.treesit-grammars}/lib "$EMACS_INIT_DIR/tree-sitter"
+              ${pkgs.myEmacs.pkg}/bin/emacs --init-directory "$EMACS_INIT_DIR"
             '';
           };
         in

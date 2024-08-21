@@ -1,7 +1,8 @@
 self: { config, lib, pkgs, ... }:
 let
   conf = config.my-emacs;
-  emacs = pkgs.myEmacs;
+  emacs = pkgs.myEmacs.pkg;
+  treesit-grammars = pkgs.myEmacs.treesit-grammars;
 
   configFiles = import ./conf {
     inherit pkgs;
@@ -75,6 +76,6 @@ in
     };
 
     home.file."${config.xdg.configHome}/emacs/tree-sitter".source =
-      "${(pkgs.emacsPackagesFor pkgs.emacs-unstable).treesit-grammars.with-all-grammars}/lib";
+      "${treesit-grammars}/lib";
   };
 }

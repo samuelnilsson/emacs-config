@@ -473,6 +473,12 @@ Enable treesitter syntax.
     (global-treesit-auto-mode))
 #+end_src
 
+Fontify more items.
+
+#+BEGIN_SRC emacs-lisp
+  (setq treesit-font-lock-level 4)
+#+END_SRC
+
 ** Line numbers
 
 Enable line numbers when programming.
@@ -513,7 +519,7 @@ Enable lsp-mode for programming language features.
 
 ** Nix
 #+begin_src emacs-lisp
-(use-package nix-mode
+(use-package nix-ts-mode
  :mode "\\.nix\\'")
 #+end_src
 
