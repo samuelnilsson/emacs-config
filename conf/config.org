@@ -450,6 +450,12 @@ Configure roam package, used for knowledge management.
     (require 'org-roam-protocol))
 #+end_src
 
+Make org-store-link use id's.
+
+#+begin_src emacs-lisp
+  (setq org-id-link-to-org-use-id t)
+#+end_src
+
 ** Autosave
 
 Autosave org buffers to avoid syncthing conflicts.
