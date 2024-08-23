@@ -72,9 +72,14 @@ Enable nerd font icons
 Enable vi-like keybindings by using evil mode.
 
 #+begin_src emacs-lisp
-(setq evil-want-keybinding nil) ; required by evil-collection
-(require 'evil)
-(evil-mode 1)
+  (setq evil-want-keybinding nil) ; required by evil-collection
+  (require 'evil)
+  (evil-mode 1)
+
+  (with-eval-after-load 'evil-maps
+    (define-key evil-motion-state-map (kbd "SPC") nil)
+    (define-key evil-motion-state-map (kbd "RET") nil)
+    (define-key evil-motion-state-map (kbd "TAB") nil))
 #+end_src
 
 Enable evil for more modes by enabling modes from evil-collection.
