@@ -31,6 +31,7 @@ in
       nerd-icons-dired
       nerd-icons-ibuffer
       nix-ts-mode
+      no-littering
       ob-mermaid
       orderless
       org-bullets

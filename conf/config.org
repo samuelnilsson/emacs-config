@@ -3,6 +3,18 @@
 #+EMAIL: samuel@samuelnilsson.net
 #+OPTIONS: num:nil
 
+* Early
+
+Configuration that needs to be loaded early.
+
+** Littering
+
+Use the no-littering package to store backup files and other emacs generated files in a common directory.
+
+#+begin_src emacs-lisp
+(require 'no-littering)
+#+end_src
+
 * UI
 
 Font and theme configuration is in early-init.
