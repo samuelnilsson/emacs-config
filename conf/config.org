@@ -594,3 +594,7 @@ Use mermaid mode for graphs/diagrams.
       ))
     )
 #+end_src
+
+#+begin_src emacs-lisp
+(use-package mermaid-mode)
+#+end_src emacs-lisp

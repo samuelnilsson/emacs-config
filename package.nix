@@ -25,6 +25,7 @@ in
       lsp-ui
       magit
       marginalia
+      mermaid-mode
       nerd-icons
       nerd-icons-completion
       nerd-icons-dired
