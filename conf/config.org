@@ -545,6 +545,8 @@ Enable lsp-mode for programming language features.
 #+begin_src emacs-lisp
 (use-package nix-ts-mode
  :mode "\\.nix\\'")
+
+  (setq lsp-nix-nil-formatter ["nixpkgs-fmt"])
 #+end_src
 
 * Other
