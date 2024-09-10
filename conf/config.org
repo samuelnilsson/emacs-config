@@ -163,8 +163,8 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
 #+begin_src emacs-lisp
   (+general-global-menu! "git" "g"
         "s" 'magit-status
-        "P" 'magit-push
-        "p" 'magit-pull)
+        "p" 'magit-push
+        "F" 'magit-pull)
 #+end_src
 
 *** Syntax
