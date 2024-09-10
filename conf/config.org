@@ -534,8 +534,9 @@ Enable lsp-mode for programming language features.
     :init
       (setq lsp-keymap-prefix "C-c l")
     :hook
-      (csharp-mode . csharp-lsp)
-    :commands lsp-deferred)
+      (csharp-mode . lsp-deferred)
+      (nix-ts-mode . lsp-deferred)
+    :commands (lsp lsp-deferred))
 
   (use-package lsp-ui :commands lsp-ui-mode)
 #+end_src
