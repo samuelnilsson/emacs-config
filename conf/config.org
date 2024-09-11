@@ -183,8 +183,10 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
 *** Navigation
 
 #+begin_src emacs-lisp
+  (global-definer
+        "SPC" 'avy-goto-char)
+    
   (+general-global-menu! "navigation" "n"
-        "n" 'avy-goto-char
         "l" 'avy-goto-line
         "w" 'avy-goto-word)
 #+end_src
@@ -218,6 +220,7 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
        "n" 'lsp-rename
        "h" 'lsp-ui-doc-glance)
 #+end_src
+
 * Navigation
 
 ** Switch window
