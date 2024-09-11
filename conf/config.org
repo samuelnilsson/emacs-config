@@ -189,11 +189,12 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
 *** Find/Search
 
 #+begin_src emacs-lisp
-    (+general-global-menu! "search" "s"
-          "l" 'consult-line
-          "L" 'consult-line-multi
-          "f" 'consult-find
-  	"d" 'dirvish)
+  (+general-global-menu! "search" "s"
+        "l" 'consult-line
+        "L" 'consult-line-multi
+        "f" 'consult-find
+        "g" 'consult-ripgrep
+	"d" 'dirvish)
 #+end_src
 
 *** Project
@@ -205,6 +206,15 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
   	"d" 'project-dired)
 #+end_src
 
+*** Lsp
+
+#+begin_src emacs-lisp
+     (+general-global-menu! "lsp" "l"
+       "r" 'lsp-find-references
+       "d" 'lsp-find-definition
+       "n" 'lsp-rename
+       "h" 'lsp-ui-doc-glance)
+#+end_src
 * Navigation
 
 ** Switch window
@@ -531,10 +541,8 @@ Enable lsp-mode for programming language features.
     (lsp-deferred))
 
   (use-package lsp-mode
-    :init
-      (setq lsp-keymap-prefix "C-c l")
     :hook
-      (csharp-mode . lsp-deferred)
+      (csharp-ts-mode . lsp-deferred)
       (nix-ts-mode . lsp-deferred)
     :commands (lsp lsp-deferred))
 
