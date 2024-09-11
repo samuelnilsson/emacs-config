@@ -145,8 +145,11 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
 
 #+begin_src emacs-lisp
   (+general-global-menu! "window" "w"
+        "w" 'other-window
         "r" 'split-window-right
         "v" 'split-window-vertically
+        "x" 'delete-window
+        "X" 'kill-window
         "s" '((lambda () (interactive) (ace-window nil)) :which-key "switch-window"))
 #+end_src
 
