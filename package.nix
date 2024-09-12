@@ -17,8 +17,6 @@ let
     mermaid-cli
   ];
 
-  prependPkgsToPath = packages: "PATH=${pkgs.lib.strings.concatMapStrings (x: "${x}/bin:") packages}:$PATH";
-
   emacs = emacs29.emacsWithPackages (
     epkgs: with epkgs; [
       ace-window
@@ -59,15 +57,20 @@ let
       which-key
     ]
   );
-in
-{
-  pkg = pkgs.writeShellApplication {
-    name = "emacs";
-    runtimeInputs = [ emacs ];
-    text = ''
-      ${prependPkgsToPath (mermaidDeps ++ dirvishDeps)}
-      ${emacs}/bin/emacs "$@"
+
+  pkg = pkgs.symlinkJoin {
+    name = "hello";
+    paths = [ emacs ];
+    buildInputs = [ pkgs.makeWrapper ];
+    postBuild = ''
+      wrapProgram $out/bin/emacs \
+        --prefix PATH : ${pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps)}
     '';
   };
+
+in
+{
+  pkg = pkg;
   treesit-grammars = treesit-grammars;
 }
+
