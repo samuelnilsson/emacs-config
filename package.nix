@@ -2,9 +2,24 @@
 let
   emacs29 = pkgs.emacsPackagesFor pkgs.emacs-unstable;
   treesit-grammars = emacs29.treesit-grammars.with-all-grammars;
-in
-{
-  pkg = emacs29.emacsWithPackages (
+
+  dirvishDeps = with pkgs; [
+    epub-thumbnailer
+    fd
+    ffmpegthumbnailer
+    gnutar
+    imagemagick
+    mediainfo
+    unzip
+  ];
+
+  mermaidDeps = with pkgs; [
+    mermaid-cli
+  ];
+
+  prependPkgsToPath = packages: "PATH=${pkgs.lib.strings.concatMapStrings (x: "${x}/bin:") packages}:$PATH";
+
+  emacs = emacs29.emacsWithPackages (
     epkgs: with epkgs; [
       ace-window
       catppuccin-theme
@@ -44,5 +59,15 @@ in
       which-key
     ]
   );
+in
+{
+  pkg = pkgs.writeShellApplication {
+    name = "emacs";
+    runtimeInputs = [ emacs ];
+    text = ''
+      ${prependPkgsToPath (mermaidDeps ++ dirvishDeps)}
+      ${emacs}/bin/emacs "$@"
+    '';
+  };
   treesit-grammars = treesit-grammars;
 }
