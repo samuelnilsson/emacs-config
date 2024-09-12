@@ -157,8 +157,23 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
 
 #+begin_src emacs-lisp
   (+general-global-menu! "org" "o"
-        "a" 'org-agenda
-        "s" 'consult-org-agenda)
+        "aI" 'org-clock-in
+        "aJ" 'org-clock-goto
+        "aL" 'org-clock-in-last
+        "aO" 'org-clock-out
+        "aX" 'org-clock-cancel
+        "aa" 'org-agenda
+        "ad" 'org-deadline
+        "as" 'consult-org-agenda
+        "as" 'org-schedule
+        "at" 'org-todo
+        "a$" 'org-archive-subtree
+        "c" 'org-capture
+        "h" 'consult-org-heading
+        "rc" 'org-roam-capture
+        "ri" 'org-roam-node-insert
+        "rs" 'org-roam-node-find
+        "t" 'org-timestamp)
 #+end_src
 
 *** Git
