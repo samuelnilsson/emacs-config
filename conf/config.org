@@ -529,9 +529,15 @@ Enable treesitter syntax.
 
 Fontify more items.
 
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (setq treesit-font-lock-level 4)
-#+END_SRC
+#+end_src
+
+Set directory to load treesitter grammars from.
+
+#+begin_src  emacs-lisp
+  (setq treesit-extra-load-path (list (getenv "TREESIT_LIB")))
+#+end_src
 
 ** Line numbers
 

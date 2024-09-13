@@ -50,7 +50,6 @@ let
       org-bullets
       org-roam
       pdf-tools
-      treesit-grammars
       treesit-auto
       vertico
       vterm
@@ -63,14 +62,10 @@ let
     paths = [ emacs ];
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
-      wrapProgram $out/bin/emacs \
-        --prefix PATH : ${pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps)}
+            wrapProgram $out/bin/emacs \
+              --prefix PATH : ${pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps)} \
+      	--prefix TREESIT_LIB : ${treesit-grammars}/lib
     '';
   };
-
 in
-{
-  pkg = pkg;
-  treesit-grammars = treesit-grammars;
-}
-
+pkg

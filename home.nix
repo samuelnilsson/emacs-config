@@ -2,7 +2,6 @@ self: { config, lib, pkgs, ... }:
 let
   conf = config.my-emacs;
   emacs = pkgs.myEmacs.pkg;
-  treesit-grammars = pkgs.myEmacs.treesit-grammars;
 
   configFiles = import ./conf {
     inherit pkgs;
@@ -60,8 +59,5 @@ in
     home.file."${config.xdg.configHome}/emacs/early.org" = {
       source = configFiles.early;
     };
-
-    home.file."${config.xdg.configHome}/emacs/tree-sitter".source =
-      "${treesit-grammars}/lib";
   };
 }
