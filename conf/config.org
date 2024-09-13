@@ -577,6 +577,7 @@ Enable lsp-mode for programming language features.
 #+end_src
 
 ** Nix
+
 #+begin_src emacs-lisp
 (use-package nix-ts-mode
  :mode "\\.nix\\'")
@@ -648,3 +649,13 @@ Use mermaid mode for graphs/diagrams.
 #+begin_src emacs-lisp
 (use-package mermaid-mode)
 #+end_src emacs-lisp
+
+** Tramp
+
+Make tramp find all executables on remote nixOS systems.
+
+#+begin_src emacs-lisp
+ (setq tramp-remote-path
+   (append tramp-remote-path
+     '(tramp-own-remote-path)))
+#+end_src
