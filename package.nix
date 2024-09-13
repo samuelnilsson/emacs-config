@@ -34,8 +34,6 @@ let
       flycheck
       general
       ligature
-      lsp-mode
-      lsp-ui
       magit
       marginalia
       mermaid-mode

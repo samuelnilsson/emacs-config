@@ -190,7 +190,6 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
 #+begin_src emacs-lisp
   (+general-global-menu! "syntax" "f"
         "s" 'consult-flycheck
-        "S" 'lsp-ui-flycheck-list
         "n" 'flycheck-next-error
         "p" 'flycheck-previous-error)
 #+end_src
@@ -229,11 +228,12 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
 *** Lsp
 
 #+begin_src emacs-lisp
-     (+general-global-menu! "lsp" "l"
-       "r" 'lsp-find-references
-       "d" 'lsp-find-definition
-       "n" 'lsp-rename
-       "h" 'lsp-ui-doc-glance)
+    (+general-global-menu! "lsp" "l"
+	"r" 'xref-find-references
+	"d" 'xref-find-definitions
+	"n" 'eglot-rename
+	"h" 'eldoc
+	"c" 'eglot-code-actions)
 #+end_src
 
 * Navigation
@@ -558,31 +558,25 @@ Enable syntax checking with flycheck globally.
 
 * Languages
 
-** Lsp
-
-Enable lsp-mode for programming language features.
-
-#+begin_src emacs-lisp
-  (defun csharp-lsp ()
-    (setq lsp-csharp-server-path (executable-find "OmniSharp"))
-    (lsp-deferred))
-
-  (use-package lsp-mode
-    :hook
-      (csharp-ts-mode . lsp-deferred)
-      (nix-ts-mode . lsp-deferred)
-    :commands (lsp lsp-deferred))
-
-  (use-package lsp-ui :commands lsp-ui-mode)
-#+end_src
-
 ** Nix
 
 #+begin_src emacs-lisp
-(use-package nix-ts-mode
- :mode "\\.nix\\'")
+  (use-package nix-ts-mode
+   :mode "\\.nix\\'")
 
-  (setq lsp-nix-nil-formatter ["nixpkgs-fmt"])
+  (add-hook 'nix-ts-mode-hook 'eglot-ensure)
+  (with-eval-after-load 'eglot
+    (add-to-list 'eglot-server-programs
+                '(nix-ts-mode . ("nil" "--stdio"))))
+#+end_src
+
+** C#
+
+#+begin_src emacs-lisp
+ (add-hook 'csharp-ts-mode-hook 'eglot-ensure)
+ (with-eval-after-load 'eglot
+   (add-to-list 'eglot-server-programs
+               '(csharp-ts-mode . ("OmniSharp" "-lsp"))))
 #+end_src
 
 * Other
