@@ -141,6 +141,17 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
         ,@body)))
 #+end_src
 
+*** General
+
+#+begin_src emacs-lisp
+    (defun ctrl-c-ctrl-c () (interactive) (call-interactively (key-binding (kbd "C-c C-c"))))
+
+    (global-definer
+          "RET" ctrl-c-ctrl-c)
+#+end_src
+
+#+RESULTS:
+
 *** Window management
 
 #+begin_src emacs-lisp
