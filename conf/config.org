@@ -649,7 +649,5 @@ Use mermaid mode for graphs/diagrams.
 Make tramp find all executables on remote nixOS systems.
 
 #+begin_src emacs-lisp
- (setq tramp-remote-path
-   (append tramp-remote-path
-     '(tramp-own-remote-path)))
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
 #+end_src
