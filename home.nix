@@ -1,7 +1,7 @@
 self: { config, lib, pkgs, ... }:
 let
   conf = config.my-emacs;
-  emacs = pkgs.myEmacs.pkg;
+  emacs = pkgs.myEmacs;
 
   configFiles = import ./conf {
     inherit pkgs;
