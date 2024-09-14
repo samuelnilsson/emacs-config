@@ -236,6 +236,13 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
 	"c" 'eglot-code-actions)
 #+end_src
 
+*** Embark
+
+#+begin_src emacs-lisp
+  (+general-global-menu! "embark" "e"
+	"b" 'embark-bindings)
+#+end_src
+
 * Navigation
 
 ** Switch window
@@ -313,8 +320,7 @@ Use embark plugin to enable actions/commands in buffers based on what's near poi
   (use-package embark
     :bind
     (("C-." . embark-act)
-     ("C-;" . embark-dwim)
-     ("C-h B" . embark-bindings))
+     ("C-;" . embark-dwim))
 
     :init
 
