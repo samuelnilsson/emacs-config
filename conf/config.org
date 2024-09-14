@@ -147,10 +147,8 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
     (defun ctrl-c-ctrl-c () (interactive) (call-interactively (key-binding (kbd "C-c C-c"))))
 
     (global-definer
-          "RET" ctrl-c-ctrl-c)
+          "RET" 'ctrl-c-ctrl-c)
 #+end_src
-
-#+RESULTS:
 
 *** Window management
 
@@ -329,7 +327,6 @@ Enable matching of space separated patterns using orderless
   (completion-category-overrides '((file (styles basic partial-completion)))))
 #+end_src
 
-
 ** Actions
 Use embark plugin to enable actions/commands in buffers based on what's near point.
 
@@ -355,7 +352,8 @@ Use embark plugin to enable actions/commands in buffers based on what's near poi
     (embark-collect-mode . consult-preview-at-point-mode))
 #+end_src
 
-** Search and navigation
+** Search
+and navigation
 
 Enable consult plugin for search anv navigation
 
@@ -448,6 +446,19 @@ Enable consult plugin for search anv navigation
 
   (setq consult-narrow-key "<")
 )
+#+end_src
+
+** Snippets
+
+#+begin_src emacs-lisp
+  (use-package yasnippet
+  :config
+    (with-eval-after-load 'yasnippet
+      (setq yas-snippet-dirs '(yasnippet-snippets-dir)))
+    (yas-reload-all)
+    (yas-global-mode))
+
+  (use-package yasnippet-snippets)
 #+end_src
 
 * Org

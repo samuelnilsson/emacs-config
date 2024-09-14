@@ -52,6 +52,8 @@ let
       vertico
       vterm
       which-key
+      yasnippet
+      yasnippet-snippets
     ]
   );
 
