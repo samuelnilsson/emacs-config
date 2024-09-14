@@ -254,6 +254,14 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
 	"b" 'embark-bindings)
 #+end_src
 
+*** Buffer
+
+#+begin_src emacs-lisp
+  (+general-global-menu! "buffer" "b"
+	"b" 'consult-buffer
+	"s" 'save-buffer)
+#+end_src
+
 * Navigation
 
 ** Switch window
@@ -261,9 +269,7 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
 Use ace-window package to switch window with fewer keystrokes and in a more predictable way
 
 #+begin_src emacs-lisp
-(use-package ace-window
-  :bind
-  (("M-p" . 'ace-window)))
+(use-package ace-window)
 #+end_src
 
 Activate ace-window even if only two windows, in order to always be able to use "[[https://github.com/abo-abo/ace-window#change-the-action-midway][action midway]]"
