@@ -284,10 +284,17 @@ Activate ace-window even if only two windows, in order to always be able to use 
 Use company package for auto completion of text in buffers.
 
 #+begin_src emacs-lisp
-(use-package company
-  :config
- (add-hook 'after-init-hook 'global-company-mode))
+  (use-package company
+    :init
+    (defun company-prog-mode-hook ()
+      (setq-local company-backends
+                '((company-capf :with company-yasnippet))))
+    :hook
+    (prog-mode . company-prog-mode-hook)
+    :config
+    (global-company-mode t))
 #+end_src
+
 
 ** Minibuffer UI
 
@@ -452,11 +459,10 @@ Enable consult plugin for search anv navigation
 
 #+begin_src emacs-lisp
   (use-package yasnippet
-  :config
-    (with-eval-after-load 'yasnippet
-      (setq yas-snippet-dirs '(yasnippet-snippets-dir)))
+    :config
+    (setq yas-snippet-dirs '(yasnippet-snippets-dir))
     (yas-reload-all)
-    (yas-global-mode))
+    (yas-global-mode t))
 
   (use-package yasnippet-snippets)
 #+end_src
@@ -683,5 +689,6 @@ Use mermaid mode for graphs/diagrams.
 Make tramp find all executables on remote nixOS systems.
 
 #+begin_src emacs-lisp
-  (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+  (use-package tramp
+    :config (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 #+end_src
