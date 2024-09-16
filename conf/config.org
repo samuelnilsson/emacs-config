@@ -281,20 +281,35 @@ Activate ace-window even if only two windows, in order to always be able to use 
 
 ** Text Completion
 
+*** Config
+
 Use company package for auto completion of text in buffers.
 
 #+begin_src emacs-lisp
-  (use-package company
-    :init
-    (defun company-prog-mode-hook ()
-      (setq-local company-backends
-                '((company-capf :with company-yasnippet))))
-    :hook
-    (prog-mode . company-prog-mode-hook)
-    :config
+  (defun company-config ()
+    (setq eglot-stay-out-of '(company)) ; prevent eglot from overriding company-backends
     (global-company-mode t))
 #+end_src
 
+*** Backends
+
+Primarly use company-capf, which display lsp completions, for prog-mode. Company-dabbrev display completions from open buffers.
+
+#+begin_src emacs-lisp
+  (setq company-prog-mode-backends '((company-capf :with company-yasnippet company-dabbrev)))
+#+end_src
+
+*** Use-package
+
+#+begin_src emacs-lisp
+    (use-package company
+      :init
+      (defun company-prog-mode-hook ()
+        (setq-local company-backends company-prog-mode-backends))
+      :hook
+      (prog-mode . company-prog-mode-hook)
+      :config (company-config))
+#+end_src
 
 ** Minibuffer UI
 
