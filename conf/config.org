@@ -283,6 +283,12 @@ Activate ace-window even if only two windows, in order to always be able to use 
 
 *** Config
 
+#+begin_src emacs-lisp :tangle yes
+(defun yas-expand-or-company-complete (&optional arg)
+  (interactive)
+  (or (yas-expand) (company-indent-or-complete-common arg)))
+#+end_src
+
 Use company package for auto completion of text in buffers.
 
 #+begin_src emacs-lisp
@@ -302,13 +308,16 @@ Primarly use company-capf, which display lsp completions, for prog-mode. Company
 *** Use-package
 
 #+begin_src emacs-lisp
-    (use-package company
-      :init
-      (defun company-prog-mode-hook ()
-        (setq-local company-backends company-prog-mode-backends))
-      :hook
-      (prog-mode . company-prog-mode-hook)
-      :config (company-config))
+  (use-package company
+    :init
+    (defun company-prog-mode-hook ()
+      (setq-local company-backends company-prog-mode-backends))
+    :hook
+    (prog-mode . company-prog-mode-hook)
+    :bind (
+  	   :map company-mode-map
+  		("<tab>" . yas-expand-or-company-complete))
+    :config (company-config))
 #+end_src
 
 ** Minibuffer UI
