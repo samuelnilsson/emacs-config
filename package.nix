@@ -40,6 +40,7 @@ let
       mermaid-mode
       nerd-icons
       nerd-icons-completion
+      nerd-icons-corfu
       nerd-icons-dired
       nerd-icons-ibuffer
       nix-ts-mode
