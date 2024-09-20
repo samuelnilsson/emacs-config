@@ -20,8 +20,9 @@ let
   emacs = emacs29.emacsWithPackages (
     epkgs: with epkgs; [
       ace-window
+      cape
       catppuccin-theme
-      company
+      corfu
       consult
       consult-flycheck
       dirvish

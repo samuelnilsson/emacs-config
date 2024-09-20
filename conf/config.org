@@ -281,43 +281,67 @@ Activate ace-window even if only two windows, in order to always be able to use 
 
 ** Text Completion
 
-*** Config
+Setup corfu as completion ui and cape for completion backends.
+
+*** Default backends
+
+Define backends to always be used. When mode specific backends are added these will also be used as lowest priority.
+
+- *dabbrev*: Complete word from current buffers.
+- *file*: Completion of file system paths.
 
 #+begin_src emacs-lisp :tangle yes
-(defun yas-expand-or-company-complete (&optional arg)
-  (interactive)
-  (or (yas-expand) (company-indent-or-complete-common arg)))
+  (defun completion-default-backends ()
+    (add-hook 'completion-at-point-functions #'cape-dabbrev)
+    (add-hook 'completion-at-point-functions #'cape-file)
+  )
 #+end_src
 
-Use company package for auto completion of text in buffers.
+*** Org mode backends
 
-#+begin_src emacs-lisp
-  (defun company-config ()
-    (setq eglot-stay-out-of '(company)) ; prevent eglot from overriding company-backends
-    (global-company-mode t))
+- *elisp-block*: Completion in elisp org blocks.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun completion-org-mode-backends ()
+    (add-to-list 'completion-at-point-functions #'cape-elisp-block)
+  )
 #+end_src
 
-*** Backends
+*** Prog mode backends
 
-Primarly use company-capf, which display lsp completions, for prog-mode. Company-dabbrev display completions from open buffers.
+- *keyword*: Keywords in the current programming language syntax.
 
-#+begin_src emacs-lisp
-  (setq company-prog-mode-backends '((company-capf :with company-yasnippet company-dabbrev)))
+#+begin_src emacs-lisp :tangle yes
+  (defun completion-prog-mode-backends ()
+    (add-to-list 'completion-at-point-functions #'cape-keyword)
+  )
+#+end_src
+
+*** Config
+
+Open and close completion popup automatically.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun completion-config ()
+    (setq corfu-auto t
+  	corfu-quit-no-match 'separator))
 #+end_src
 
 *** Use-package
 
-#+begin_src emacs-lisp
-  (use-package company
+#+begin_src emacs-lisp :tangle yes
+  (use-package corfu
     :init
-    (defun company-prog-mode-hook ()
-      (setq-local company-backends company-prog-mode-backends))
-    :hook
-    (prog-mode . company-prog-mode-hook)
-    :bind (
-  	   :map company-mode-map
-  		("<tab>" . yas-expand-or-company-complete))
-    :config (company-config))
+    (global-corfu-mode)
+    :config
+    (completion-config))
+
+  (use-package cape
+    :bind ("M-p" . cape-prefix-map)
+    :hook (prog-mode . completion-prog-mode-backends)
+  	(org-mode . completion-org-mode-backends)
+    :init
+    (completion-default-backends))
 #+end_src
 
 ** Minibuffer UI
