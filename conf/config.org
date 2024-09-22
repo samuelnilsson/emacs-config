@@ -614,6 +614,13 @@ Use utf-8 characters for org entities.
 #+begin_src emacs-lisp
   (setq org-pretty-entities t)
 #+end_src
+
+Make font-lock hide emphasis markers.
+
+#+begin_src emacs-lisp
+  (setq org-hide-emphasis-markers t)
+#+end_src
+
 * Editor
 
 ** Syntax
