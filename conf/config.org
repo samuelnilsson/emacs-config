@@ -609,6 +609,11 @@ Use "modern style" for org entities.
              (org-agenda-finalize . org-modern-agenda))
 #+end_src
 
+Use utf-8 characters for org entities.
+
+#+begin_src emacs-lisp
+  (setq org-pretty-entities t)
+#+end_src
 * Editor
 
 ** Syntax
