@@ -600,11 +600,13 @@ Autosave org buffers to avoid syncthing conflicts.
 #+end_src
 
 ** Editor
-Display bullets instead of asterisks in headers.
+
+Use "modern style" for org entities.
 
 #+begin_src emacs-lisp
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+  (use-package org-modern
+    :hook (org-mode . org-modern-mode)
+             (org-agenda-finalize . org-modern-agenda))
 #+end_src
 
 * Editor

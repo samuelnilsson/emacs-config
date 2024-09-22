@@ -47,7 +47,7 @@ let
       no-littering
       ob-mermaid
       orderless
-      org-bullets
+      org-modern
       org-roam
       pdf-tools
       treesit-auto
