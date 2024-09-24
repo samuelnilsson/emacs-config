@@ -51,6 +51,7 @@ let
       org-roam
       pdf-tools
       treesit-auto
+      verb
       vertico
       vterm
       which-key

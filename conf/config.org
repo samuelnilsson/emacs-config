@@ -186,7 +186,9 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
         "rc" 'org-roam-capture
         "ri" 'org-roam-node-insert
         "rs" 'org-roam-node-find
-        "t" 'org-timestamp)
+        "t" 'org-timestamp
+	"vv" 'verb-mode
+	"vr" 'verb-send-request-on-point-other-window-stay)
 #+end_src
 
 *** Git
@@ -623,6 +625,21 @@ Make font-lock hide emphasis markers.
 
 #+begin_src emacs-lisp
   (setq org-hide-emphasis-markers t)
+#+end_src
+
+** Rest client
+
+Use verb as a rest client for testing out api:s.
+
+- *verb-auto-kill-response-buffers*: Have only one response buffer at the same time by killing old ones automatically
+- *network-stream-use-client-certificates*: Use certificates defined in .netrc
+
+#+begin_src emacs-lisp :tangle yes
+(use-package verb
+    :hook
+    (verb-mode . (lambda () (setq-local network-stream-use-client-certificates t)))
+    :config
+    (setq verb-auto-kill-response-buffers t))
 #+end_src
 
 * Editor
