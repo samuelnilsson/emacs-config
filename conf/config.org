@@ -182,13 +182,14 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
         "at" 'org-todo
         "a$" 'org-archive-subtree
         "c" 'org-capture
+        "e" 'org-edit-special
         "h" 'consult-org-heading
         "rc" 'org-roam-capture
         "ri" 'org-roam-node-insert
         "rs" 'org-roam-node-find
         "t" 'org-timestamp
-	"vv" 'verb-mode
-	"vr" 'verb-send-request-on-point-other-window-stay)
+  	"vv" 'verb-mode
+  	"vr" 'verb-send-request-on-point-other-window-stay)
 #+end_src
 
 *** Git
