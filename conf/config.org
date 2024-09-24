@@ -177,7 +177,7 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
         "aX" 'org-clock-cancel
         "aa" 'org-agenda
         "ad" 'org-deadline
-        "as" 'consult-org-agenda
+        "af" 'consult-org-agenda
         "as" 'org-schedule
         "at" 'org-todo
         "a$" 'org-archive-subtree
