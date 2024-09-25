@@ -653,6 +653,12 @@ Enable syntax checking with flycheck globally.
                '(csharp-ts-mode . ("OmniSharp" "-lsp"))))
 #+end_src
 
+** Protobuf
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package protobuf-ts-mode)
+#+end_src
+
 * Other
 
 ** Revert buffer automatically

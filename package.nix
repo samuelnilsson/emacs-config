@@ -50,6 +50,7 @@ let
       org-modern
       org-roam
       pdf-tools
+      protobuf-ts-mode
       treesit-auto
       verb
       vertico
