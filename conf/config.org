@@ -746,6 +746,6 @@ Use emms to play music.
       :config
       (emms-all)
       (setq emms-player-list '(emms-player-mpv)
-    	emms-info-functions '(emms-info-native)
+    	emms-info-functions '(emms-info-libtag)
         emms-source-file-default-directory "/mnt/music/")) 
 #+end_src
