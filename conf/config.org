@@ -732,3 +732,20 @@ Make tramp find all executables on remote nixOS systems.
   (use-package tramp
     :config (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 #+end_src
+
+** Music
+
+Use emms to play music.
+
+- *emms-player-list*: Use mpv for playback
+- *emms-info-functions*: Function used to retrieve metadata from media files
+- *emms-source-file-default-directory:* Default directory for music
+
+#+begin_src emacs-lisp :tangle yes
+    (use-package emms
+      :config
+      (emms-all)
+      (setq emms-player-list '(emms-player-mpv)
+    	emms-info-functions '(emms-info-native)
+        emms-source-file-default-directory "/mnt/music/")) 
+#+end_src

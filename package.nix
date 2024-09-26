@@ -17,6 +17,10 @@ let
     mermaid-cli
   ];
 
+  emmsDeps = with pkgs; [
+    mpv
+  ];
+
   emacs = emacs29.emacsWithPackages (
     epkgs: with epkgs; [
       ace-window
@@ -29,6 +33,7 @@ let
       doom-modeline
       embark
       embark-consult
+      emms
       envrc
       evil
       evil-collection
@@ -67,7 +72,7 @@ let
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
             wrapProgram $out/bin/emacs \
-              --prefix PATH : ${pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps)} \
+              --prefix PATH : ${pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps ++ emmsDeps)} \
       	--prefix TREESIT_LIB : ${treesit-grammars}/lib
     '';
   };
