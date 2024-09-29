@@ -71,6 +71,8 @@ let
       orderless
       org-modern
       org-roam
+      pass
+      password-store
       pdf-tools
       protobuf-ts-mode
       treesit-auto

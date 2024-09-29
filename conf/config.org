@@ -750,3 +750,22 @@ Use emms to play music.
   	emms-info-functions '(emms-info-libtag)
           emms-source-file-default-directory "~/music/"))
 #+end_src
+
+** Password manager
+
+Use pass to manage gopass password store.
+
+/password-store--run-rename/ is redefined to /mv/ since the command /rename/ is not available in gopass.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package pass
+    :requires password-store
+    :init 
+    (defun password-store--run-rename (entry new-entry &optional force)
+      (password-store--run "mv"
+  			 (if force "--force")
+  			 entry
+  			 new-entry))
+    :custom
+    (password-store-executable (executable-find "gopass")))
+#+end_src
