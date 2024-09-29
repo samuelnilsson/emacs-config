@@ -488,7 +488,7 @@ Set custom todo keywords.
 
 #+begin_src emacs-lisp
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+      '((sequence "TODO(t)" "IN PROGRESS(i)" "WAIT(w)" "|" "DONE(d)" "CANCELLED(c)")))
 #+end_src
 
 Setup refile targets.
