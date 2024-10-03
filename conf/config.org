@@ -753,19 +753,12 @@ Use emms to play music.
 
 ** Password manager
 
-Use pass to manage gopass password store.
-
-/password-store--run-rename/ is redefined to /mv/ since the command /rename/ is not available in gopass.
+Use pass to manage password store.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package pass
     :requires password-store
-    :init 
-    (defun password-store--run-rename (entry new-entry &optional force)
-      (password-store--run "mv"
-  			 (if force "--force")
-  			 entry
-  			 new-entry))
     :custom
-    (password-store-executable (executable-find "gopass")))
+    (password-store-executable (executable-find "pass"))
+    (password-store-dir (getenv "PASSWORD_STORE_DIR")))
 #+end_src
