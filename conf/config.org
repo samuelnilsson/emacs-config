@@ -640,9 +640,11 @@ Enable syntax checking with flycheck globally.
 
   (add-hook 'nix-ts-mode-hook 'eglot-ensure)
   (with-eval-after-load 'eglot
-    (add-to-list 'eglot-server-programs
-                '(nix-ts-mode . ("nil" "--stdio"))))
+  (dolist (mode '((nix-ts-mode . ("nil" :initializationOptions
+                                     (:formatting (:command [ "nixfmt" ]))))))
+    (add-to-list 'eglot-server-programs mode))))
 #+end_src
+
 
 ** C#
 

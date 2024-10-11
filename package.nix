@@ -86,7 +86,7 @@ let
   );
 
   pkg = pkgs.symlinkJoin {
-    name = "hello";
+    name = "emacs";
     paths = [ emacs ];
     buildInputs = [ pkgs.makeWrapper ];
     postBuild = ''
