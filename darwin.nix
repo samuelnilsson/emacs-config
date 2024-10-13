@@ -12,18 +12,12 @@ in
   };
 
   config = lib.mkIf conf.enable {
-    programs.emacs = {
-      enable = true;
-      package = emacs;
-    };
-
     services.emacs = {
-      client.enable = true;
       enable = true;
       package = emacs;
     };
 
-    home.packages = with pkgs; [
+    fonts.packages = with pkgs; [
       (nerdfonts.override { fonts = [ "Iosevka" ]; })
       (iosevka.override {
         privateBuildPlan = {

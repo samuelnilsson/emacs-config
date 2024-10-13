@@ -85,14 +85,51 @@ let
     ]
   );
 
+  conf =
+    let
+      config = import ./conf {
+        pkgs = pkgs;
+        font = {
+          size = "120";
+        };
+      };
+    in
+    pkgs.stdenv.mkDerivation {
+      pname = "emacs-conf";
+
+      name = "emacs-conf";
+
+      src = ./conf;
+
+      buildInputs = [
+        emacs
+      ];
+
+      buildPhase = ''
+        cp ${config.config} config.org
+        cp ${config.early} early.org
+        emacs --batch --eval "(require 'org)" --eval '(org-babel-tangle-file "config.org" "config.el")'
+        emacs --batch --eval "(require 'org)" --eval '(org-babel-tangle-file "early.org" "early.el")'
+      '';
+
+      installPhase = ''
+        mkdir $out
+        cp ./config.el $out
+        cp ./early.el $out
+        cp ./init.el $out
+        cp ./early-init.el $out
+      '';
+    };
+
   pkg = pkgs.symlinkJoin {
     name = "emacs";
     paths = [ emacs ];
-    buildInputs = [ pkgs.makeWrapper ];
+    buildInputs = [ pkgs.makeWrapper conf ];
     postBuild = ''
-            wrapProgram $out/bin/emacs \
-              --prefix PATH : ${pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps ++ emmsDeps)} \
-      	--prefix TREESIT_LIB : ${treesit-grammars}/lib
+      wrapProgram $out/bin/emacs \
+        --prefix PATH : ${pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps ++ emmsDeps)} \
+        --prefix TREESIT_LIB : ${treesit-grammars}/lib \
+        --add-flags "--init-directory ${conf}"
     '';
   };
 in

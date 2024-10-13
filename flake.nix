@@ -4,12 +4,22 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
-  outputs = { self, nixpkgs, emacs-overlay }:
+  outputs = { self, nixpkgs, emacs-overlay, darwin }:
     let
-      system = "x86_64-linux";
+      systems = [
+        "x86_64-darwin"
+        "x86_64-linux"
+      ];
+
+      forAllSystems = nixpkgs.lib.genAttrs systems;
 
       overlayMyEmacs = prev: final: {
         myEmacs = import ./package.nix {
@@ -19,56 +29,38 @@
 
       overlays = [ emacs-overlay.overlays.default overlayMyEmacs ];
 
-      pkgs = import nixpkgs {
+      pkgsSystem = forAllSystems (system: import nixpkgs {
         system = system;
         overlays = overlays;
-      };
-
+      });
     in
     {
-      packages.${system}.default = pkgs.myEmacs;
+      packages = forAllSystems (system: {
+        default = pkgsSystem.${system}.myEmacs;
+      });
 
       homeManagerModules.default = import ./home.nix self;
 
+      darwinModules.default = import ./darwin self;
+
       overlays.default = overlays;
 
-      apps.${system}.default =
+      devShells = forAllSystems (system:
         let
-          config = import ./conf {
-            inherit pkgs;
-            font = {
-              size = "120";
-            };
-          };
-
-          start = pkgs.writeShellApplication {
-            name = "start";
-            runtimeInputs = [ pkgs.myEmacs ];
-            text = ''
-              EMACS_INIT_DIR=$(mktemp -d)
-              cp ${config.config} "$EMACS_INIT_DIR/config.org"
-              cp ${config.early} "$EMACS_INIT_DIR/early.org"
-              cp ${builtins.toString ./conf/init.el} "$EMACS_INIT_DIR"
-              cp ${builtins.toString ./conf/early-init.el} "$EMACS_INIT_DIR"
-              ${pkgs.myEmacs}/bin/emacs --init-directory "$EMACS_INIT_DIR"
-            '';
-          };
+          pkgs = pkgsSystem.${system};
         in
         {
-          type = "app";
-          program = "${start}/bin/start";
-        };
-
-      devShell.${system} = pkgs.mkShell {
-        buildInputs = with pkgs; [
-          git
-          nil
-          nixpkgs-fmt
-          pre-commit
-        ];
-        shellHook = ''
-          pre-commit install
-        '';
-      };
+          default = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              git
+              nil
+              nixpkgs-fmt
+              pre-commit
+            ];
+            shellHook = ''
+              pre-commit install
+            '';
+          };
+        });
     };
 }

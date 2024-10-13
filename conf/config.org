@@ -7,6 +7,10 @@
 
 Configuration that needs to be loaded early.
 
+#+begin_src emacs-lisp
+(setq user-emacs-directory "~/.config/emacs")
+#+end_src
+
 ** Littering
 
 Use the no-littering package to store backup files and other emacs generated files in a common directory.
@@ -642,7 +646,7 @@ Enable syntax checking with flycheck globally.
   (with-eval-after-load 'eglot
   (dolist (mode '((nix-ts-mode . ("nil" :initializationOptions
                                      (:formatting (:command [ "nixfmt" ]))))))
-    (add-to-list 'eglot-server-programs mode))))
+    (add-to-list 'eglot-server-programs mode)))
 #+end_src
 
 
