@@ -21,17 +21,17 @@
 
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
-      overlayMyEmacs = prev: final: {
+      overlayMyEmacs = final: prev: {
         myEmacs = import ./package.nix {
           pkgs = final;
         };
       };
 
-      overlays = [ emacs-overlay.overlays.default overlayMyEmacs ];
+      overlays = overlayMyEmacs;
 
       pkgsSystem = forAllSystems (system: import nixpkgs {
         system = system;
-        overlays = overlays;
+        overlays = [ overlayMyEmacs emacs-overlay.overlays.default ];
       });
     in
     {
@@ -43,7 +43,7 @@
 
       darwinModules.default = import ./darwin.nix self;
 
-      overlays.default = overlays;
+      overlays.default = overlayMyEmacs;
 
       devShells = forAllSystems (system:
         let

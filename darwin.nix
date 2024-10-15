@@ -17,6 +17,6 @@ in
       package = emacs;
     };
 
-    fonts.packages = (import ./font.nix);
+    fonts.packages = import ./font.nix;
   };
 }
