@@ -41,7 +41,7 @@
 
       homeManagerModules.default = import ./home.nix self;
 
-      darwinModules.default = import ./darwin self;
+      darwinModules.default = import ./darwin.nix self;
 
       overlays.default = overlays;
 
