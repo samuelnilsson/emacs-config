@@ -12,4 +12,5 @@ self: { config, lib, pkgs, ... }:
       };
       set = "Aile";
     })
-  ]}
+  ];
+}
