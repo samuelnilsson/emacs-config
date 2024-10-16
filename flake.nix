@@ -21,16 +21,16 @@
 
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
-      overlays = (self: super: super.lib.composeManyExtensions [
-        (self: super: {
+      overlays = (final: prev: prev.lib.composeManyExtensions [
+        (final: prev: {
           myEmacs = import ./package.nix {
-            pkgs = super;
+            pkgs = final;
           };
         })
-        emacs-overlay.overlays.default
+        emacs-overlay.overlays.package
       ]
-        self
-        super);
+        final
+        prev);
 
       pkgsSystem = forAllSystems (system: import nixpkgs {
         system = system;

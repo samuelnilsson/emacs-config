@@ -1,6 +1,6 @@
 { pkgs }:
 let
-  emacs29 = pkgs.emacsPackagesFor pkgs.emacs-unstable;
+  emacs29 = pkgs.emacsPackagesFor pkgs.emacs;
   treesit-grammars = emacs29.treesit-grammars.with-all-grammars;
 
 
@@ -19,7 +19,6 @@ let
   ];
 
   emmsDeps = with pkgs; [
-    mpv
     (pkgs.stdenv.mkDerivation {
       name = "emms-taglib";
       src = pkgs.fetchurl {
