@@ -23,6 +23,6 @@ in
       package = emacs;
     };
 
-    home.packages = (import ./font.nix);
+    home.packages = (import ./font.nix).fonts;
   };
 }
