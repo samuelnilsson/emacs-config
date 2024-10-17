@@ -17,6 +17,8 @@ in
       package = emacs;
     };
 
+    environment.systemPackages = [ emacs ];
+
     fonts.packages = import ./font.nix pkgs;
   };
 }
