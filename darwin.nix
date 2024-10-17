@@ -12,11 +12,6 @@ in
   };
 
   config = lib.mkIf conf.enable {
-    services.emacs = {
-      enable = true;
-      package = emacs;
-    };
-
     environment.systemPackages = [ emacs ];
 
     fonts.packages = import ./font.nix pkgs;
