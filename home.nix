@@ -6,23 +6,29 @@ in
 {
   options.my-emacs = with lib; {
     enable = mkEnableOption "Enable my custom emacs";
+    isDarwin = mkOption { type = boolean; default = false; };
     font = {
       size = mkOption { type = types.int; };
     };
   };
 
-  config = lib.mkIf conf.enable {
-    programs.emacs = {
-      enable = true;
-      package = emacs;
-    };
+  config = lib.mkIf conf.enable (
+    lib.mkMerge [
+      (lib.mkIf (!conf.isDarwin) {
+        services.emacs = {
+          client.enable = true;
+          enable = true;
+          package = emacs;
+        };
+      }
+      )
+      {
+        programs.emacs = {
+          enable = true;
+          package = emacs;
+        };
 
-    services.emacs = {
-      client.enable = true;
-      enable = true;
-      package = emacs;
-    };
-
-    home.packages = import ./font.nix pkgs;
-  };
+        home.packages = import ./font.nix pkgs;
+      }
+    ]);
 }
