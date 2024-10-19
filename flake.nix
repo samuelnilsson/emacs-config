@@ -4,15 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    darwin = {
-      url = "github:lnl7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
-  outputs = { self, nixpkgs, emacs-overlay, darwin }:
+  outputs = { self, nixpkgs, emacs-overlay }:
     let
       systems = [
         "x86_64-darwin"
@@ -43,8 +38,6 @@
       });
 
       homeManagerModules.default = import ./home.nix self;
-
-      darwinModules.default = import ./darwin.nix self;
 
       overlays.default = overlays;
 
