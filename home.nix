@@ -6,7 +6,7 @@ in
 {
   options.my-emacs = with lib; {
     enable = mkEnableOption "Enable my custom emacs";
-    isDarwin = mkOption { type = boolean; default = false; };
+    isDarwin = mkOption { type = types.bool; default = false; };
     font = {
       size = mkOption { type = types.int; };
     };
