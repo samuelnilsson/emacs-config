@@ -9,7 +9,13 @@
     emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
-  outputs = { self, nixpkgs, emacs-overlay, pre-commit-hooks }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      emacs-overlay,
+      pre-commit-hooks,
+    }:
     let
       systems = [
         "x86_64-darwin"
@@ -18,21 +24,21 @@
 
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
-      overlays = (final: prev: prev.lib.composeManyExtensions [
-        (final: prev: {
-          myEmacs = import ./package.nix {
-            pkgs = final;
-          };
-        })
-        emacs-overlay.overlays.package
-      ]
-        final
-        prev);
+      overlays = (
+        final: prev:
+        prev.lib.composeManyExtensions [
+          (final: prev: { myEmacs = import ./package.nix { pkgs = final; }; })
+          emacs-overlay.overlays.package
+        ] final prev
+      );
 
-      pkgsSystem = forAllSystems (system: import nixpkgs {
-        system = system;
-        overlays = [ overlays ];
-      });
+      pkgsSystem = forAllSystems (
+        system:
+        import nixpkgs {
+          system = system;
+          overlays = [ overlays ];
+        }
+      );
     in
     {
       packages = forAllSystems (system: {
@@ -62,18 +68,24 @@
         };
       });
 
-      devShells = forAllSystems (system:
+      devShells = forAllSystems (
+        system:
         let
           pkgs = pkgsSystem.${system};
         in
         {
           default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              git
-              nil
-              nixfmt-rfc-style
-            ];
+            inherit (self.checks.${system}.pre-commit-check) shellHook;
+            buildInputs =
+              with pkgs;
+              [
+                git
+                nil
+                nixfmt-rfc-style
+              ]
+              ++ self.checks.${system}.pre-commit-check.enabledPackages;
           };
-        });
+        }
+      );
     };
 }
