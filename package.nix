@@ -3,7 +3,6 @@ let
   emacs29 = pkgs.emacsPackagesFor pkgs.emacs;
   treesit-grammars = emacs29.treesit-grammars.with-all-grammars;
 
-
   dirvishDeps = with pkgs; [
     epub-thumbnailer
     fd
@@ -14,9 +13,7 @@ let
     unzip
   ];
 
-  mermaidDeps = with pkgs; [
-    mermaid-cli
-  ];
+  mermaidDeps = with pkgs; [ mermaid-cli ];
 
   emmsDeps = with pkgs; [
     (pkgs.stdenv.mkDerivation {
@@ -28,7 +25,7 @@ let
 
       buildInputs = [ pkgs.taglib ];
       buildPhase = ''
-        	LDFLAGS='-L${pkgs.lib.makeLibraryPath [ pkgs.zlib ]}' make emms-print-metadata
+        LDFLAGS='-L${pkgs.lib.makeLibraryPath [ pkgs.zlib ]}' make emms-print-metadata
       '';
       installPhase = ''
         	mkdir -p $out/bin
@@ -100,9 +97,7 @@ let
 
       src = ./conf;
 
-      buildInputs = [
-        emacs
-      ];
+      buildInputs = [ emacs ];
 
       buildPhase = ''
         cp ${config.config} config.org
@@ -123,7 +118,10 @@ let
   pkg = pkgs.symlinkJoin {
     name = "emacs";
     paths = [ emacs ];
-    buildInputs = [ pkgs.makeWrapper conf ];
+    buildInputs = [
+      pkgs.makeWrapper
+      conf
+    ];
     postBuild = ''
       wrapProgram $out/bin/emacs \
         --prefix PATH : ${pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps ++ emmsDeps)} \
