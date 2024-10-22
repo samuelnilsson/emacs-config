@@ -120,6 +120,13 @@ Enable which-key to see the possible keybindings following the currently entered
   :init (which-key-mode))
 #+end_src
 
+** Mac
+
+#+begin_src emacs-lisp :tangle yes
+(setq mac-command-modifier 'control)
+(setq mac-control-modifier 'super)
+#+end_src
+
 ** Spacemacs-like menus
 
 Use general.el to define space as the global prefix key.
