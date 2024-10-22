@@ -1,4 +1,9 @@
-{ pkgs }:
+{
+  pkgs,
+  font ? {
+    size = 120;
+  },
+}:
 let
   emacs29 = pkgs.emacsPackagesFor pkgs.emacs;
   treesit-grammars = emacs29.treesit-grammars.with-all-grammars;
@@ -85,12 +90,7 @@ let
 
   conf =
     let
-      config = import ./conf {
-        pkgs = pkgs;
-        font = {
-          size = "120";
-        };
-      };
+      config = import ./conf { inherit pkgs font; };
     in
     pkgs.stdenv.mkDerivation {
       pname = "emacs-conf";

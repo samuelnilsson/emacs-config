@@ -7,14 +7,17 @@ self:
 }:
 let
   conf = config.my-emacs;
-  emacs = pkgs.myEmacs;
+  emacs = pkgs.myEmacs.override { font = conf.font; };
   inherit (pkgs) stdenv;
 in
 {
   options.my-emacs = with lib; {
     enable = mkEnableOption "Enable my custom emacs";
     font = {
-      size = mkOption { type = types.int; };
+      size = mkOption {
+        type = types.int;
+        default = if stdenv.isDarwin then 160 else 120;
+      };
     };
   };
 
