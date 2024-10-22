@@ -3,6 +3,8 @@ let
   emacs29 = pkgs.emacsPackagesFor pkgs.emacs;
   treesit-grammars = emacs29.treesit-grammars.with-all-grammars;
 
+  consultDeps = with pkgs; [ ripgrep ];
+
   dirvishDeps = with pkgs; [
     epub-thumbnailer
     fd
@@ -16,16 +18,16 @@ let
   mermaidDeps = with pkgs; [ mermaid-cli ];
 
   emmsDeps = with pkgs; [
-    (pkgs.stdenv.mkDerivation {
+    (stdenv.mkDerivation {
       name = "emms-taglib";
       src = pkgs.fetchurl {
         url = "ftp://ftp.gnu.org/gnu/emms/emms-6.00.tar.gz";
         sha256 = "sha256-awW1pv+BHQyx8BGbn+gxqH3WolKZQWglfNC3u8DbuNo=";
       };
 
-      buildInputs = [ pkgs.taglib ];
+      buildInputs = [ taglib ];
       buildPhase = ''
-        LDFLAGS='-L${pkgs.lib.makeLibraryPath [ pkgs.zlib ]}' make emms-print-metadata
+        LDFLAGS='-L${lib.makeLibraryPath [ zlib ]}' make emms-print-metadata
       '';
       installPhase = ''
         	mkdir -p $out/bin
@@ -124,7 +126,7 @@ let
     ];
     postBuild = ''
       wrapProgram $out/bin/emacs \
-        --prefix PATH : ${pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps ++ emmsDeps)} \
+        --prefix PATH : ${pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps ++ emmsDeps ++ consultDeps)} \
         --prefix TREESIT_LIB : ${treesit-grammars}/lib \
         --add-flags "--init-directory ${conf}"
     '';
