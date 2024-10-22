@@ -2,12 +2,14 @@
   description = "My emacs config";
 
   inputs = {
+    pre-commit-hooks.url = "github:cachix/git-hooks.nix";
+
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     emacs-overlay.url = "github:nix-community/emacs-overlay";
   };
 
-  outputs = { self, nixpkgs, emacs-overlay }:
+  outputs = { self, nixpkgs, emacs-overlay, pre-commit-hooks }:
     let
       systems = [
         "x86_64-darwin"
@@ -41,6 +43,25 @@
 
       overlays.default = overlays;
 
+      pre-commit-check = forAllSystems (
+        system:
+        pre-commit-hooks.lib.${system}.run {
+          src = ./.;
+          hooks = {
+            nixfmt-rfc-style.enable = true;
+          };
+        }
+      );
+
+      checks = forAllSystems (system: {
+        pre-commit-check = pre-commit-hooks.lib.${system}.run {
+          src = ./.;
+          hooks = {
+            nixfmt-rfc-style.enable = true;
+          };
+        };
+      });
+
       devShells = forAllSystems (system:
         let
           pkgs = pkgsSystem.${system};
@@ -50,12 +71,8 @@
             buildInputs = with pkgs; [
               git
               nil
-              nixpkgs-fmt
-              pre-commit
+              nixfmt-rfc-style
             ];
-            shellHook = ''
-              pre-commit install
-            '';
           };
         });
     };
