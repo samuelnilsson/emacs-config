@@ -27,7 +27,7 @@
       overlays = (
         final: prev:
         prev.lib.composeManyExtensions [
-          (final: prev: { myEmacs = import ./package.nix { pkgs = final; }; })
+          (final: prev: { myEmacs = (final.callPackage ./package.nix { pkgs = final; }); })
           emacs-overlay.overlays.package
         ] final prev
       );
