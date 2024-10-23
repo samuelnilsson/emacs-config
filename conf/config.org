@@ -125,6 +125,12 @@ Enable which-key to see the possible keybindings following the currently entered
 #+begin_src emacs-lisp :tangle yes
 (setq mac-command-modifier 'control)
 (setq mac-control-modifier 'super)
+  #+end_src
+
+  Disable altgr to be able to use it for special characters.
+
+  #+begin_src emacs-lisp :tangle yes
+  (setq ns-right-alternate-modifier 'none)
 #+end_src
 
 ** Spacemacs-like menus
