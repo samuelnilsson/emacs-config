@@ -23,6 +23,60 @@ Use the no-littering package to store backup files and other emacs generated fil
 
 Font and theme configuration is in early-init.
 
+** Set opacity
+
+#+begin_src emacs-lisp :tangle yes
+  (set-frame-parameter nil 'alpha 98)
+#+end_src
+
+** Set theme
+
+#+begin_src emacs-lisp :tangle yes
+  (load-theme 'catppuccin :no-confirm)
+  (setq catppuccin-flavor 'macchiato)
+  (catppuccin-reload)
+#+end_src
+
+** Font
+
+*** Define faces
+
+#+begin_src emacs-lisp :tangle yes
+  (set-face-attribute 'default nil :font "Iosevka Nerd Font" :height @fontSize@)
+  (set-face-attribute 'fixed-pitch nil :font "Iosevka Nerd Font" :height @fontSize@)
+  (set-face-attribute 'variable-pitch nil :font "Iosevka Aile" :height @fontSize@)
+#+end_src
+
+Use variable pitch for org mode.
+
+#+begin_src emacs-lisp :tangle yes
+  (defun set-buffer-variable-pitch ()
+    (interactive)
+    (variable-pitch-mode t)
+    (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-link nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-code nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-date nil :inherit 'fixed-pitch)
+    (set-face-attribute 'org-special-keyword nil :inherit 'fixed-pitch))
+
+  (add-hook 'org-mode-hook 'set-buffer-variable-pitch)
+#+end_src
+
+*** Ligatures
+
+Enable ligatures.
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package ligature
+    :config
+      (ligature-set-ligatures 'prog-mode '("<---" "<--"  "<<-" "<-" "->" "-->" "--->" "<->" "<-->" "<--->" "<---->" "<!--"
+					 "<==" "<===" "<=" "=>" "=>>" "==>" "===>" ">=" "<=>" "<==>" "<===>" "<====>" "<!---"
+					 "<~~" "<~" "~>" "~~>" "::" ":::" "==" "!=" "===" "!=="
+					 ":=" ":-" ":+" "<*" "<*>" "*>" "<|" "<|>" "|>" "+:" "-:" "=:" "<******>" "++" "+++"))
+      (global-ligature-mode t))
+#+end_src
+
 ** Disable unused ui elements
 
 #+begin_src emacs-lisp

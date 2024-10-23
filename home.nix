@@ -21,23 +21,12 @@ in
     };
   };
 
-  config = lib.mkIf conf.enable (
-    lib.mkMerge [
-      (lib.mkIf stdenv.isLinux {
-        services.emacs = {
-          client.enable = true;
-          enable = true;
-          package = emacs;
-        };
-      })
-      {
-        programs.emacs = {
-          enable = true;
-          package = emacs;
-        };
+  config = lib.mkIf conf.enable {
+    programs.emacs = {
+      enable = true;
+      package = emacs;
+    };
 
-        home.packages = import ./font.nix pkgs;
-      }
-    ]
-  );
+    home.packages = import ./font.nix pkgs;
+  };
 }

@@ -103,17 +103,13 @@ let
 
       buildPhase = ''
         cp ${config.config} config.org
-        cp ${config.early} early.org
         emacs --batch --eval "(require 'org)" --eval '(org-babel-tangle-file "config.org" "config.el")'
-        emacs --batch --eval "(require 'org)" --eval '(org-babel-tangle-file "early.org" "early.el")'
       '';
 
       installPhase = ''
         mkdir $out
         cp ./config.el $out
-        cp ./early.el $out
         cp ./init.el $out
-        cp ./early-init.el $out
       '';
     };
 
