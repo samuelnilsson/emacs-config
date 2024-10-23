@@ -23,7 +23,7 @@ in
 
   config = lib.mkIf conf.enable (
     lib.mkMerge [
-      (lib.mkIf stdenv.isDarwin {
+      (lib.mkIf stdenv.isLinux {
         services.emacs = {
           client.enable = true;
           enable = true;
