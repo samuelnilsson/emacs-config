@@ -669,6 +669,10 @@ Optionally enable polling of jira tickets using org-jira.
   (use-package org-jira
       :init
       (setq jiralib-url (getenv "JIRA_URL"))
+      (setq jiralib-token
+      (cons "Authorization"
+          (concat "Bearer " (auth-source-pick-first-password
+      	:host (getenv "JIRA_URL"))))
       :config
       (let ((dir "~/.org-jira"))
   	(unless (file-exists-p dir)
