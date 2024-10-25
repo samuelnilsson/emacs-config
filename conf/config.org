@@ -660,6 +660,21 @@ Use verb as a rest client for testing out api:s.
     (setq verb-auto-kill-response-buffers t))
 #+end_src
 
+** Jira
+
+Optionally enable polling of jira tickets using org-jira.
+
+#+begin_src emacs-lisp :tangle yes
+  (when (eq (getenv "JIRA") "true")
+  (use-package org-jira
+      :init
+      (setq jiralib-url (getenv "JIRA_URL"))
+      :config
+      (let ((dir "~/.org-jira"))
+  	(unless (file-exists-p dir)
+  	    (make-directory dir t)))))
+#+end_src
+
 * Editor
 
 ** Syntax
@@ -833,5 +848,6 @@ Use pass to manage password store.
     :requires password-store
     :custom
     (password-store-executable (executable-find "pass"))
-    (password-store-dir (getenv "PASSWORD_STORE_DIR")))
+    (password-store-dir (getenv "PASSWORD_STORE_DIR"))
+    (auth-sources '(password-store)))
 #+end_src

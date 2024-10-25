@@ -3,6 +3,10 @@
   font ? {
     size = 120;
   },
+  jira ? {
+    enable = false;
+    url = "";
+  },
 }:
 let
   emacs29 = pkgs.emacsPackagesFor pkgs.emacs;
@@ -42,7 +46,9 @@ let
   ];
 
   emacs = emacs29.emacsWithPackages (
-    epkgs: with epkgs; [
+    epkgs:
+    with epkgs;
+    [
       ace-window
       cape
       catppuccin-theme
@@ -86,6 +92,7 @@ let
       yasnippet
       yasnippet-snippets
     ]
+    ++ (pkgs.lib.optionals jira.enable [ org-jira ])
   );
 
   conf =
@@ -121,10 +128,14 @@ let
       conf
     ];
     postBuild = ''
-      wrapProgram $out/bin/emacs \
-        --prefix PATH : ${pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps ++ emmsDeps ++ consultDeps)} \
-        --prefix TREESIT_LIB : ${treesit-grammars}/lib \
-        --add-flags "--init-directory ${conf}"
+            wrapProgram $out/bin/emacs \
+              --prefix PATH : ${
+                pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps ++ emmsDeps ++ consultDeps)
+              } \
+              --prefix TREESIT_LIB : ${treesit-grammars}/lib \
+      	--prefix JIRA : ${if jira.enable then "true" else "false"} \
+      	--prefix JIRA_URL : "${jira.url}" \
+              --add-flags "--init-directory ${conf}"
     '';
   };
 in

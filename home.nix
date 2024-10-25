@@ -7,7 +7,10 @@ self:
 }:
 let
   conf = config.my-emacs;
-  emacs = pkgs.myEmacs.override { font = conf.font; };
+  emacs = pkgs.myEmacs.override {
+    font = conf.font;
+    jira = conf.jira;
+  };
   inherit (pkgs) stdenv;
 in
 {
@@ -17,6 +20,16 @@ in
       size = mkOption {
         type = types.int;
         default = if stdenv.isDarwin then 160 else 120;
+      };
+    };
+    jira = {
+      enable = mkOption {
+        type = types.bool;
+        default = false;
+      };
+      url = mkOption {
+        type = types.string;
+        default = "";
       };
     };
   };
