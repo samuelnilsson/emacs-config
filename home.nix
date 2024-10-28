@@ -35,6 +35,10 @@ in
         type = types.string;
         default = "";
       };
+      extra-conf = mkOption {
+        type = types.string;
+        default = "";
+      };
     };
   };
 
