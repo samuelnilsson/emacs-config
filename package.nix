@@ -6,6 +6,8 @@
   jira ? {
     enable = false;
     url = "";
+    user = "";
+    extra-conf = "";
   },
 }:
 let
@@ -135,7 +137,9 @@ let
               --prefix TREESIT_LIB : ${treesit-grammars}/lib \
       	--prefix JIRA : ${if jira.enable then "true" else "false"} \
       	--prefix JIRA_URL : "${jira.url}" \
-              --add-flags "--init-directory ${conf}"
+      	--prefix JIRA_USER : "${jira.user}" \
+      	--prefix JIRA_EXTRA_CONF : "${jira.extra-conf}" \
+        --add-flags "--init-directory ${conf}"
     '';
   };
 in

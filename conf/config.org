@@ -664,19 +664,27 @@ Use verb as a rest client for testing out api:s.
 
 Optionally enable polling of jira tickets using org-jira.
 
+*extra-config* contains extra configurations that are jira instance specific, such as custom jql queries.
+
 #+begin_src emacs-lisp :tangle yes
-  (when (eq (getenv "JIRA") "true")
   (use-package org-jira
-      :init
-      (setq jiralib-url (concat "https://" (getenv "JIRA_URL")))
+      :if
+      (string= (getenv "JIRA") "true")
+      :after
+      (password-store)
       :config
+      (setq jiralib-url (concat "https://" (getenv "JIRA_URL")))
       (setq jiralib-token
         (cons "Authorization"
             (concat "Bearer " (auth-source-pick-first-password
-      	        :host (getenv "JIRA_URL")))))
+      	        :host (getenv "JIRA_URL")
+  	      :user (getenv "JIRA_USER")))))
       (let ((dir "~/.org-jira"))
-  	(unless (file-exists-p dir)
-  	    (make-directory dir t)))))
+        (unless (file-exists-p dir)
+  	      (make-directory dir t)))
+      (let ((extra-config (getenv "JIRA_EXTRA_CONF")))
+        (when (file-exists-p extra-config)
+  	(load-file extra-config))))
 #+end_src
 
 * Editor
@@ -848,10 +856,13 @@ Use emms to play music.
 Use pass to manage password store.
 
 #+begin_src emacs-lisp :tangle yes
-  (use-package pass
-    :requires password-store
-    :custom
-    (password-store-executable (executable-find "pass"))
-    (password-store-dir (getenv "PASSWORD_STORE_DIR"))
-    (auth-sources '(password-store)))
+      (use-package password-store
+        :custom
+        (password-store-executable (executable-find "pass"))
+        (password-store-dir (getenv "PASSWORD_STORE_DIR"))
+        :init
+        (add-to-list 'auth-sources 'password-store))
+
+      (use-package pass
+        :requires password-store)
 #+end_src

@@ -31,6 +31,10 @@ in
         type = types.string;
         default = "";
       };
+      user = mkOption {
+        type = types.string;
+        default = "";
+      };
     };
   };
 
