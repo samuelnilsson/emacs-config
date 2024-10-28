@@ -467,6 +467,7 @@ Use embark plugin to enable actions/commands in buffers based on what's near poi
   (use-package embark
     :bind
     (("C-." . embark-act)
+     ("M-." . embark-act-all)
      ("C-;" . embark-dwim))
 
     :init
