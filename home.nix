@@ -28,15 +28,15 @@ in
         default = false;
       };
       url = mkOption {
-        type = types.string;
+        type = types.str;
         default = "";
       };
       user = mkOption {
-        type = types.string;
+        type = types.str;
         default = "";
       };
       extra-conf = mkOption {
-        type = types.string;
+        type = types.str;
         default = "";
       };
     };
