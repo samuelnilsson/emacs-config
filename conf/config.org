@@ -849,7 +849,7 @@ Use emms to play music.
     (emms-all)
     (setq emms-player-list '(emms-player-mpv)
   	emms-info-functions '(emms-info-libtag)
-          emms-source-file-default-directory "~/music/"))
+          emms-source-file-default-directory (getenv "MUSIC_DIR")))
 #+end_src
 
 ** Password manager
