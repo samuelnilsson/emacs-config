@@ -136,7 +136,7 @@ let
                 pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps ++ emmsDeps ++ consultDeps)
               } \
               --prefix TREESIT_LIB : ${treesit-grammars}/lib \
-      	--prefix MUSIC_DIR : ${musicDir} \
+      	--prefix MUSIC_DIR : "${musicDir}" \
       	--prefix JIRA : ${if jira.enable then "true" else "false"} \
       	--prefix JIRA_URL : "${jira.url}" \
       	--prefix JIRA_USER : "${jira.user}" \
