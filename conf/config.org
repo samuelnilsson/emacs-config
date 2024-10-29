@@ -683,7 +683,7 @@ Optionally enable polling of jira tickets using org-jira.
       (let ((dir "~/.org-jira"))
         (unless (file-exists-p dir)
   	      (make-directory dir t)))
-      (let ((extra-config (getenv "JIRA_EXTRA_CONF")))
+      (let ((extra-config (message (nth 0 (split-string (getenv "JIRA_EXTRA_CONF") ":")))))
         (when (file-exists-p extra-config)
   	(load-file extra-config))))
 #+end_src
