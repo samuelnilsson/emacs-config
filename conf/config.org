@@ -764,6 +764,15 @@ Enable syntax checking with flycheck globally.
   (use-package protobuf-ts-mode)
 #+end_src
 
+** Python
+
+#+begin_src emacs-lisp
+ (add-hook 'python-ts-mode-hook 'eglot-ensure)
+ (with-eval-after-load 'eglot
+   (add-to-list 'eglot-server-programs
+               '(python-ts-mode . ("pyright-langserver" "--stdio"))))
+#+end_src
+
 * Projects
 
 ** Tabspaces
