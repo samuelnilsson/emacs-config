@@ -87,6 +87,7 @@ let
       password-store
       pdf-tools
       protobuf-ts-mode
+      tabspaces
       treesit-auto
       verb
       vertico

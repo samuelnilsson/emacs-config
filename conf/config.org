@@ -306,10 +306,14 @@ Macro for creating nested global shortcut menus, taken from [[https://gist.githu
 *** Project
 
 #+begin_src emacs-lisp
-    (+general-global-menu! "project" "p"
-          "p" 'project-switch-project
-          "f" 'project-find-file
-  	"d" 'project-dired)
+  (+general-global-menu! "project" "p"
+        "p" 'tabspaces-open-or-create-project-and-workspace
+        "s" 'tabspaces-switch-or-create-workspace
+        "f" 'consult-find
+        "d" 'project-dired
+        "C" 'tabspaces-clear-buffers
+        "d" 'tabspaces-close-workspace
+        "k" 'tabspaces-kill-buffers-close-workspace)
 #+end_src
 
 *** Lsp
@@ -758,6 +762,52 @@ Enable syntax checking with flycheck globally.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package protobuf-ts-mode)
+#+end_src
+
+* Projects
+
+** Tabspaces
+
+Use tabspaces mode to create buffer isolated workspaces. It also enable project scoped tabs.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package tabspaces
+  :hook (after-init . tabspaces-mode)
+  :commands (tabspaces-switch-or-create-workspace
+             tabspaces-open-or-create-project-and-workspace)
+  :custom
+  (tabspaces-use-filtered-buffers-as-default t)
+  (tabspaces-default-tab "default")
+  (tabspaces-remove-to-default t)
+  (tabspaces-include-buffers '("*scratch*" "*Messages*"))
+  (tabspaces-initialize-project-with-todo nil)
+  ;; sessions
+  (tabspaces-session t)
+  (tabspaces-session-auto-restore t)
+  (tab-bar-new-tab-choice "*scratch*"))
+#+end_src
+
+ Make tabspace buffer list use consult. See [[https://github.com/mclear-tools/tabspaces#consult][docs]].
+
+#+begin_src emacs-lisp :tangle yes
+(with-eval-after-load 'consult
+    ;; hide full buffer list (still available with "b" prefix)
+    (consult-customize consult--source-buffer :hidden t :default nil)
+    ;; set consult-workspace buffer list
+    (defvar consult--source-workspace
+    (list :name     "Workspace Buffers"
+	    :narrow   ?w
+	    :history  'buffer-name-history
+	    :category 'buffer
+	    :state    #'consult--buffer-state
+	    :default  t
+	    :items    (lambda () (consult--buffer-query
+			    :predicate #'tabspaces--local-buffer-p
+			    :sort 'visibility
+			    :as #'buffer-name)))
+
+    "Set workspace buffer list for consult-buffer.")
+    (add-to-list 'consult-buffer-sources 'consult--source-workspace))
 #+end_src
 
 * Other
