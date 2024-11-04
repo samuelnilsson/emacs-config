@@ -900,6 +900,7 @@ Use emms to play music.
 - *emms-player-list*: Use mpv for playback
 - *emms-info-functions*: Function used to retrieve metadata from media files
 - *emms-source-file-default-directory:* Default directory for music
+- *emms-browser-covers:* Automatically cache resized cover images
 
 #+begin_src emacs-lisp :tangle yes
   (use-package emms-info-libtag)
@@ -908,7 +909,8 @@ Use emms to play music.
     (emms-all)
     (setq emms-player-list '(emms-player-mpv)
   	emms-info-functions '(emms-info-libtag)
-          emms-source-file-default-directory (getenv "MUSIC_DIR")))
+          emms-source-file-default-directory (getenv "MUSIC_DIR")
+  	emms-browser-covers 'emms-browser-cache-thumbnail))
 #+end_src
 
 ** Password manager
