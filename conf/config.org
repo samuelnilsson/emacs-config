@@ -583,11 +583,11 @@ Setup refile targets.
 Capture buffer format and which file to capture to
 
 #+begin_src emacs-lisp
-
-(setq org-capture-templates
-      '(("t" "Todo" entry
-         (file "~/wiki/inbox.org")
-       	"* TODO %?\n  %i\n  %a")))
+  (setq org-capture-tag (getenv "ORG_CAPTURE_TAG"))
+  (setq org-capture-templates
+        '(("t" "Todo" entry
+           (file "~/wiki/inbox.org")
+         	"* TODO %?%(when (> (length org-capture-tag) 0) (org-set-tags org-capture-tag))\n  %i\n  %a")))
 #+end_src
 
 ** Roam

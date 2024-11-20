@@ -4,6 +4,7 @@
     size = 120;
   },
   musicDir ? "",
+  org-capture-tag ? "",
   jira ? {
     enable = false;
     url = "";
@@ -144,6 +145,7 @@ let
       	--prefix JIRA_URL : "${jira.url}" \
       	--prefix JIRA_USER : "${jira.user}" \
       	--prefix JIRA_EXTRA_CONF : "${jira.extra-conf}" \
+      	--prefix ORG_CAPTURE_TAG : "${jira.org-capture-tag}" \
         --add-flags "--init-directory ${conf}"
     '';
   };

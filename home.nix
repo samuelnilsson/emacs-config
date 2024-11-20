@@ -27,6 +27,10 @@ in
       type = types.str;
       default = if stdenv.isDarwin then "/Volumes/music" else "/mnt/music";
     };
+    org-capture-tag = mkOption {
+      type = types.str;
+      default = "";
+    };
     jira = {
       enable = mkOption {
         type = types.bool;
