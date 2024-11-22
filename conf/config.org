@@ -8,15 +8,7 @@
 Configuration that needs to be loaded early.
 
 #+begin_src emacs-lisp
-(setq user-emacs-directory "~/.config/emacs")
-#+end_src
-
-** Littering
-
-Use the no-littering package to store backup files and other emacs generated files in a common directory.
-
-#+begin_src emacs-lisp
-(require 'no-littering)
+    (setq user-emacs-directory "~/.config/emacs")
 #+end_src
 
 * UI
@@ -927,4 +919,20 @@ Use pass to manage password store.
 
       (use-package pass
         :requires password-store)
+#+end_src
+
+** Littering
+
+Configuration to store backup files and other emacs generated files in a common directory.
+
+#+begin_src emacs-lisp
+  (setq backup-by-copying t
+      backup-directory-alist '(("." . "~/.emacs-saves/"))
+      delete-old-versions t
+      kept-new-versions 6
+      kept-old-versions 2
+      version-control t)
+
+  (setq auto-save-file-name-transforms
+        `((".*" "~/.emacs-saves/" t)))
 #+end_src
