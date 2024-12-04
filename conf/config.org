@@ -926,6 +926,8 @@ Use pass to manage password store.
 Configuration to store backup files and other emacs generated files in a common directory.
 
 #+begin_src emacs-lisp
+  (mkdir "~/.emacs-saves/")
+
   (setq backup-by-copying t
       backup-directory-alist '(("." . "~/.emacs-saves/"))
       delete-old-versions t

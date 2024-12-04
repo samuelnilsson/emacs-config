@@ -144,7 +144,7 @@ let
       	--prefix JIRA_URL : "${jira.url}" \
       	--prefix JIRA_USER : "${jira.user}" \
       	--prefix JIRA_EXTRA_CONF : "${jira.extra-conf}" \
-      	--prefix ORG_CAPTURE_TAG : "${jira.org-capture-tag}" \
+      	--prefix ORG_CAPTURE_TAG : "${org-capture-tag}" \
         --add-flags "--init-directory ${conf}"
     '';
   };
