@@ -1,5 +1,5 @@
 pkgs: with pkgs; [
-  (nerdfonts.override { fonts = [ "Iosevka" ]; })
+  nerd-fonts.iosevka
   (iosevka.override {
     privateBuildPlan = {
       family = "Iosevka Aile";
