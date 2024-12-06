@@ -134,17 +134,17 @@ let
       conf
     ];
     postBuild = ''
-            wrapProgram $out/bin/emacs \
-              --prefix PATH : ${
-                pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps ++ emmsDeps ++ consultDeps ++ lspDeps)
-              } \
-              --prefix TREESIT_LIB : ${treesit-grammars}/lib \
-      	--prefix MUSIC_DIR : "${musicDir}" \
-      	--prefix JIRA : ${if jira.enable then "true" else "false"} \
-      	--prefix JIRA_URL : "${jira.url}" \
-      	--prefix JIRA_USER : "${jira.user}" \
-      	--prefix JIRA_EXTRA_CONF : "${jira.extra-conf}" \
-      	--prefix ORG_CAPTURE_TAG : "${org-capture-tag}" \
+      wrapProgram $out/bin/emacs \
+        --prefix PATH : ${
+          pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps ++ emmsDeps ++ consultDeps ++ lspDeps)
+        } \
+        --set TREESIT_LIB ${treesit-grammars}/lib \
+      	--set MUSIC_DIR "${musicDir}" \
+      	--set JIRA ${if jira.enable then "true" else "false"} \
+      	--set JIRA_URL "${jira.url}" \
+      	--set JIRA_USER "${jira.user}" \
+      	--set JIRA_EXTRA_CONF "${jira.extra-conf}" \
+      	--set ORG_CAPTURE_TAG "${org-capture-tag}" \
         --add-flags "--init-directory ${conf}"
     '';
   };
