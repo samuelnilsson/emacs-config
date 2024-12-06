@@ -74,6 +74,7 @@ let
       ligature
       magit
       marginalia
+      markdown-mode
       mermaid-mode
       nerd-icons
       nerd-icons-completion

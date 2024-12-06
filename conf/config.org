@@ -756,6 +756,12 @@ Enable syntax checking with flycheck globally.
   (use-package protobuf-ts-mode)
 #+end_src
 
+** Markdown
+
+#+begin_src emacs-lisp :tangle yes
+  (use-package markdown-mode)
+#+end_src
+
 ** Python
 
 #+begin_src emacs-lisp
