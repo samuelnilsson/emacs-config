@@ -771,6 +771,16 @@ Enable syntax checking with flycheck globally.
                '(python-ts-mode . ("pyright-langserver" "--stdio"))))
 #+end_src
 
+** SQL
+
+Load sql in babel to be able to query sql in org code blocks.
+
+#+begin_src emacs-lisp :tangle yes
+(org-babel-do-load-languages
+      'org-babel-load-languages
+      '((sql . t)))
+#+end_src
+
 * Projects
 
 ** Tabspaces
@@ -869,13 +879,13 @@ Use pdf-tools to view pdf files.
 Use mermaid mode for graphs/diagrams.
 
 #+begin_src emacs-lisp
-(use-package ob-mermaid
- :init (org-babel-do-load-languages
-    'org-babel-load-languages
-    '((mermaid . t)
-      (scheme . t)
-      ))
-    )
+  (use-package ob-mermaid
+   :init (org-babel-do-load-languages
+      'org-babel-load-languages
+      '((mermaid . t)
+        (scheme . t)
+        ))
+      )
 #+end_src
 
 #+begin_src emacs-lisp
