@@ -51,6 +51,8 @@ let
 
   lspDeps = with pkgs; [ pyright ];
 
+  dbDeps = with pkgs; [ postgresql ];
+
   emacs = emacs29.emacsWithPackages (
     epkgs:
     with epkgs;
@@ -137,7 +139,7 @@ let
     postBuild = ''
       wrapProgram $out/bin/emacs \
         --prefix PATH : ${
-          pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps ++ emmsDeps ++ consultDeps ++ lspDeps)
+          pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps ++ emmsDeps ++ consultDeps ++ lspDeps ++ dbDeps)
         } \
         --set TREESIT_LIB ${treesit-grammars}/lib \
       	--set MUSIC_DIR "${musicDir}" \
