@@ -53,6 +53,8 @@ let
 
   dbDeps = with pkgs; [ postgresql ];
 
+  orgDeps = with pkgs; [ texliveBasic ];
+
   emacs = emacs29.emacsWithPackages (
     epkgs:
     with epkgs;
@@ -139,7 +141,7 @@ let
     postBuild = ''
       wrapProgram $out/bin/emacs \
         --prefix PATH : ${
-          pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps ++ emmsDeps ++ consultDeps ++ lspDeps ++ dbDeps)
+          pkgs.lib.makeBinPath (mermaidDeps ++ dirvishDeps ++ emmsDeps ++ consultDeps ++ lspDeps ++ orgDeps)
         } \
         --set TREESIT_LIB ${treesit-grammars}/lib \
       	--set MUSIC_DIR "${musicDir}" \
