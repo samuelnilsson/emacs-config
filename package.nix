@@ -53,7 +53,7 @@ let
 
   dbDeps = with pkgs; [ postgresql ];
 
-  orgDeps = with pkgs; [ texliveBasic ];
+  orgDeps = with pkgs; [ texliveMedium ];
 
   emacs = emacs29.emacsWithPackages (
     epkgs:
